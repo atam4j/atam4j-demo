@@ -36,6 +36,12 @@
             <version>${dw.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-assets</artifactId>
+            <version>${dw.version}</version>
+        </dependency>
+
 
         <!--Test Dependencies-->
 

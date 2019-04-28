@@ -3,6 +3,7 @@ package me.atam.planes4sale;
 import com.google.common.io.Resources;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
@@ -24,9 +25,11 @@ public class Planes4SaleApplication extends Application<Configuration> {
     @Override
     public void run(Configuration configuration, Environment environment) throws Exception {
         environment.jersey().register(new HomepageResource());
+        environment.jersey().register(new SearchResource());
     }
 
     public void initialize(Bootstrap<Configuration> bootstrap) {
+        bootstrap.addBundle(new AssetsBundle());
         bootstrap.addBundle(new ViewBundle<Configuration>() {
             @Override
             public Map<String, Map<String, String>> getViewConfiguration(Configuration config) {

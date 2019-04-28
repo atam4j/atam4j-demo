@@ -6,7 +6,7 @@ import io.dropwizard.testing.ResourceHelpers;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.service.DriverService;
 import org.slf4j.Logger;
@@ -58,12 +58,12 @@ public class BrowserBasedAcceptanceTest {
                     .usingAnyFreePort()
                     .build();
             service.start();
-            driver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+            driver = new RemoteWebDriver(service.getUrl(), new ChromeOptions());
             LOGGER.info("Starting started locally");
         }
         else{
             LOGGER.info("Using remote webdriver...");
-            driver = new RemoteWebDriver(new URL(getConfig().getSeleniumRemoteAddress()), DesiredCapabilities.chrome());
+            driver = new RemoteWebDriver(new URL(getConfig().getSeleniumRemoteAddress()), new ChromeOptions());
         }
 
     }
@@ -75,6 +75,8 @@ public class BrowserBasedAcceptanceTest {
             LOGGER.info("Managing Dropwizard. Calling .after()...");
             RULE.after();
         }
+
+        driver.quit();
 
         if(getConfig().isStartSeleniumLocally()) {
             LOGGER.info("Stopping Selenium locally");

@@ -1,0 +1,10 @@
+version: '2'
+services:
+  planes-4-sale-site:
+    build: planes-4-sale-site/.
+    ports:
+      - "8080:8080"
+  planes-4-sale-accepance-test-monitors:
+    build: acceptance-tests-as-monitors/.
+    ports:
+      - "9090:9090"

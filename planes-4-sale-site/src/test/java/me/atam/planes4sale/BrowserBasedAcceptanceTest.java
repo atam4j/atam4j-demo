@@ -13,13 +13,22 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.File;
+import java.net.URL;
 
 public class BrowserBasedAcceptanceTest {
+
+
+
+
+
+
+
+
 
     @ClassRule
     public static final DropwizardAppRule<Configuration> RULE;
 
-    protected WebDriver driver;
+    protected RemoteWebDriver driver;
     protected DriverService service;
 
     static {
@@ -32,16 +41,22 @@ public class BrowserBasedAcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        service = new ChromeDriverService.Builder()
+        if (TestRunMode.getMode() == TestRunMode.Mode.BUILD) {
+            service = new ChromeDriverService.Builder()
                 .usingDriverExecutable(new File("/usr/bin/chromedriver"))//the driver - not the executable usr/bin/google-chrome
                 .usingAnyFreePort()
                 .build();
-        service.start();
-        driver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+            service.start();
+            driver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+        } else {
+            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), DesiredCapabilities.chrome());
+        }
     }
 
     @After
     public void tearDown() throws Exception {
-        service.stop();
+        if (TestRunMode.getMode() == TestRunMode.Mode.BUILD) {
+            service.stop();
+        }
     }
 }

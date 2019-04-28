@@ -1,10 +1,30 @@
 version: '2'
 services:
+  selenium-hub:
+    image: selenium/hub:3.141.59-bismuth
+    container_name: selenium-hub
+    depends_on:
+          - planes-4-sale-site
+    ports:
+      - "4444:4444"
+  chrome:
+    image: selenium/node-chrome:3.141.59-bismuth
+    depends_on:
+      - selenium-hub
+      - planes-4-sale-site
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
   planes-4-sale-site:
     build: planes-4-sale-site/.
     ports:
       - "8080:8080"
   planes-4-sale-accepance-test-monitors:
     build: acceptance-tests-as-monitors/.
+    depends_on:
+      - selenium-hub
+      - planes-4-sale-site
+    volumes:
+      - /dev/shm:/dev/shm
     ports:
       - "9090:9090"

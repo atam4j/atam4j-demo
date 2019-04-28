@@ -1,5 +1,4 @@
-
-# Dropwizard server configuration
+# Server configuration for running in IDE
 server:
 
   applicationConnectors:
@@ -20,3 +19,10 @@ logging:
   level: INFO
   appenders:
     - type: console
+
+acceptanceTestConfig:
+  managesDropWizard: false
+  siteAddress: "http://planes-4-sale-site:8080"
+  startSeleniumLocally: false
+  seleniumRemoteAddress: "http://selenium-hub:4444/wd/hub"
+  localChromeDriver: null

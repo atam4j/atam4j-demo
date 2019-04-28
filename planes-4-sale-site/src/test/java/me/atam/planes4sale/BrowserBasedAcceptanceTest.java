@@ -1,16 +1,16 @@
 package me.atam.planes4sale;
 
 import io.dropwizard.Configuration;
+import io.dropwizard.testing.DropwizardTestSupport;
 import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.ClassRule;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.service.DriverService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
@@ -18,44 +18,66 @@ import java.net.URL;
 public class BrowserBasedAcceptanceTest {
 
 
+    public static final DropwizardTestSupport<Configuration> RULE;
 
-
-
-
-
-
-
-    @ClassRule
-    public static final DropwizardAppRule<Configuration> RULE;
-
+    private static Logger LOGGER = LoggerFactory.getLogger(BrowserBasedAcceptanceTest.class);
     protected RemoteWebDriver driver;
     protected DriverService service;
 
+
     static {
-        if (TestRunMode.getMode() == TestRunMode.Mode.BUILD) {
-            RULE = new DropwizardAppRule<>(Planes4SaleApplication.class, ResourceHelpers.resourceFilePath("app-config.yml"));
+        if (AcceptanceTestConfigLoader.getConfig().isManagesDropWizard()) {
+            RULE = new DropwizardTestSupport<>(Planes4SaleApplication.class, ResourceHelpers.resourceFilePath("app-config.yml"));
+
         } else {
             RULE = null;
         }
     }
 
+    public AcceptanceTestConfig getConfig(){
+        return AcceptanceTestConfigLoader.getConfig();
+    }
+
+    protected String getHomePageAddress() {
+        return getConfig().getSiteAddress();
+    }
+
     @Before
     public void setUp() throws Exception {
-        if (TestRunMode.getMode() == TestRunMode.Mode.BUILD) {
+        LOGGER.info("Setup with config: " + getConfig());
+
+        if (getConfig().isManagesDropWizard()){
+            LOGGER.info("Managing Dropwizard. Calling .before()...");
+            RULE.before();
+        }
+
+        if(getConfig().isStartSeleniumLocally()){
+            LOGGER.info("Starting Selenium locally");
             service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("/usr/bin/chromedriver"))//the driver - not the executable usr/bin/google-chrome
-                .usingAnyFreePort()
-                .build();
+                    .usingDriverExecutable(new File(getConfig().getLocalChromeDriver()))
+                    .usingAnyFreePort()
+                    .build();
             service.start();
             driver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
-        } else {
-            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), DesiredCapabilities.chrome());
+            LOGGER.info("Starting started locally");
         }
+        else{
+            LOGGER.info("Using remote webdriver...");
+            driver = new RemoteWebDriver(new URL(getConfig().getSeleniumRemoteAddress()), DesiredCapabilities.chrome());
+        }
+
     }
 
     @After
     public void tearDown() throws Exception {
-        if (TestRunMode.getMode() == TestRunMode.Mode.BUILD) {
+
+        if (getConfig().isManagesDropWizard()){
+            LOGGER.info("Managing Dropwizard. Calling .after()...");
+            RULE.after();
+        }
+
+        if(getConfig().isStartSeleniumLocally()) {
+            LOGGER.info("Stopping Selenium locally");
             service.stop();
         }
     }

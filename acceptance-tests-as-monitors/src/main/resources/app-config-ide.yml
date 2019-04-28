@@ -1,0 +1,28 @@
+# Server configuration for running in IDE
+server:
+
+  applicationConnectors:
+    - type: http
+      port: 9090
+
+  adminConnectors:
+      - type: http
+        port: 9091
+
+  requestLog:
+    appenders:
+      - type: console
+        # The timezone used to format dates. HINT: USE THE DEFAULT, UTC.
+        timeZone: UTC
+
+logging:
+  level: INFO
+  appenders:
+    - type: console
+
+acceptanceTestConfig:
+  managesDropWizard: false
+  siteAddress: "http://localhost:8080"
+  startSeleniumLocally: true
+  seleniumRemoteAddress: null
+  localChromeDriver: "/usr/bin/chromedriver"

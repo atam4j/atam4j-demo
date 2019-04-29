@@ -1,11 +1,13 @@
 package me.atam.planes4sale;
 
+import me.atam.atam4j.Monitor;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Monitor
 public class HomepageAcceptanceTest extends BrowserBasedAcceptanceTest {
 
     @Test
@@ -20,8 +22,4 @@ public class HomepageAcceptanceTest extends BrowserBasedAcceptanceTest {
         WebElement airbusSearchButton = driver.findElementById("airbusSearchButton");
         assertThat(airbusSearchButton.getText(), CoreMatchers.is("Search For Airbus Planes"));
     }
-
-
-
-
 }

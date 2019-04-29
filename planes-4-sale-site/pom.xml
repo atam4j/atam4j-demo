@@ -71,6 +71,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>me.atam</groupId>
+            <artifactId>atam4j-annotations</artifactId>
+            <version>${atam4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

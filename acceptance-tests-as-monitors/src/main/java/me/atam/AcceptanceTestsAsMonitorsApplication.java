@@ -37,7 +37,6 @@ public class AcceptanceTestsAsMonitorsApplication extends Application<Acceptance
         Atam4j atam4j = new Atam4j.Atam4jBuilder(environment.jersey())
                 .withUnit(TimeUnit.MILLISECONDS)
                 .withInitialDelay(INITIAL_DELAY)
-                .withTestClasses(HomepageAcceptanceTest.class)
                 .withPeriod(PERIOD)
                 .build();
 

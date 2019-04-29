@@ -1,10 +1,12 @@
 package me.atam.planes4sale;
 
+import me.atam.atam4j.Monitor;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Monitor
 public class SearchAcceptanceTest extends BrowserBasedAcceptanceTest {
 
     @Test

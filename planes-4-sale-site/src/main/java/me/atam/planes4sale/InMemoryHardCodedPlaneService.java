@@ -17,15 +17,15 @@ public class InMemoryHardCodedPlaneService implements PlaneService {
     public InMemoryHardCodedPlaneService() {
 
         //Jonathan Rankin
-        this.planes.add(new Plane(BOEING, "777-319/ER", LocalDate.of(2010, Month.DECEMBER, 1), "1836933.jpg", "ZK-OKM " ));
-        this.planes.add(new Plane(BOEING, "777-31B/ER", LocalDate.of(2015, Month.DECEMBER, 1), "2833243.jpg", "B-2049 " ));
-        this.planes.add(new Plane(AIRBUS, "A340-541", LocalDate.of(2003, Month.DECEMBER, 1), "1360015.jpg", "A6-ERD " ));
+        this.planes.add(new Plane("bfe8a680", BOEING, "777-319/ER", LocalDate.of(2010, Month.DECEMBER, 1), "1836933.jpg", "ZK-OKM" ));
+        this.planes.add(new Plane("9fc2a9c9", BOEING, "777-31B/ER", LocalDate.of(2015, Month.DECEMBER, 1), "2833243.jpg", "B-2049" ));
+        this.planes.add(new Plane("fa8983a3", AIRBUS, "A340-541", LocalDate.of(2003, Month.DECEMBER, 1), "1360015.jpg", "A6-ERD" ));
 
     }
 
 
     @Override
     public List<Plane> getPlanesByManufacturer(String manufacturer) {
-        return planes.stream().filter(p -> p.getManufacturer().equals(manufacturer)).collect(Collectors.toList());
+        return planes.stream().filter(p -> p.getManufacturer().equalsIgnoreCase(manufacturer)).collect(Collectors.toList());
     }
 }

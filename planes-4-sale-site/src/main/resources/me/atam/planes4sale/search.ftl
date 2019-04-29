@@ -10,7 +10,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="canonical"  href="assets/bootstrap-3.4.1-dist/css/bootstrap.css"
+    <link rel="canonical" href="assets/bootstrap-3.4.1-dist/css/bootstrap.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
     <title>Starter Template for Bootstrap</title>
@@ -33,16 +33,32 @@
         <p class="lead">Search Resuls below</p>
 
 
+        <table class="table" style="width:100%">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">ManufactureDate</th>
+                    <th scope="col">reg</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
 
-        <#list getPlanes as item>
-            <div id="plane-">
-                <!--<p>${item.manufacturer}</p>-->
-                <!--<p>${item.reg}</p>-->
-            </div>
+                <#list planes as currentPlane>
+                <tr id="plane-${currentPlane_index}">
+                    <td class="manufacturer">${currentPlane.manufacturer} </td>
+                    <td class="model">${currentPlane.model}</td>
+                    <td class="manufactureDate">${currentPlane.manufactureDate}</td>
+                    <td class="reg">${currentPlane.reg}</td>
+                    <td class="image"><img src="assets/plane-photos/${currentPlane.imageId}" width="200"/></td>
+                </tr>
+                </#list>
+            </tbody>
+        </table>
 
-        </#list>
 
-    </div>
+</div>
 
 </div>
 

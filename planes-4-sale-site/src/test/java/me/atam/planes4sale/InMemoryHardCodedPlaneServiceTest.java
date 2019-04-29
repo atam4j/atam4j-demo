@@ -20,6 +20,14 @@ public class InMemoryHardCodedPlaneServiceTest {
     }
 
     @Test
+    public void getPlanesByManufacturerReturnsBoeingsWhenCaseIsDifferent() {
+        List<Plane> boeingPlanes = inMemoryPlaneService.getPlanesByManufacturer("BoeInG");
+        assertThat(boeingPlanes.size(), CoreMatchers.is(2));
+        assertThat(boeingPlanes.get(0).getManufacturer(), CoreMatchers.is("Boeing"));
+        assertThat(boeingPlanes.get(1).getManufacturer(), CoreMatchers.is("Boeing"));
+    }
+
+    @Test
     public void getPlanesByManufacturerReturnsAirbus() {
         List<Plane> boeingPlanes = inMemoryPlaneService.getPlanesByManufacturer("Airbus");
         assertThat(boeingPlanes.size(), CoreMatchers.is(1));

@@ -7,13 +7,16 @@ public class Plane {
     public static String BOEING = "Boeing";
     public static String AIRBUS = "Airbus";
 
+    private String id;
     private String manufacturer;
     private String model;
     private LocalDate manufactureDate;
     private String imageId;
     private String reg;
 
-    public Plane(String manufacturer, String model, LocalDate manufactureDate, String imageId, String reg) {
+
+    public Plane(String id, String manufacturer, String model, LocalDate manufactureDate, String imageId, String reg) {
+        this.id = id;
         this.manufacturer = manufacturer;
         this.model = model;
         this.manufactureDate = manufactureDate;
@@ -39,5 +42,9 @@ public class Plane {
 
     public String getReg() {
         return reg;
+    }
+
+    public String getId() {
+        return id;
     }
 }

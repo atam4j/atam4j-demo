@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="" type=" me.atam.planes4sale.SearchResultsView" -->
 <html lang="en">
 
 <head>
@@ -30,6 +31,16 @@
     <div class="starter-template">
         <h1>Planes 4 Sale!!!!</h1>
         <p class="lead">Search Resuls below</p>
+
+
+
+        <#list getPlanes as item>
+            <div id="plane-">
+                <!--<p>${item.manufacturer}</p>-->
+                <!--<p>${item.reg}</p>-->
+            </div>
+
+        </#list>
 
     </div>
 

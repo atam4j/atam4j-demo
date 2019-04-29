@@ -25,7 +25,7 @@ public class Planes4SaleApplication extends Application<Configuration> {
     @Override
     public void run(Configuration configuration, Environment environment) throws Exception {
         environment.jersey().register(new HomepageResource());
-        environment.jersey().register(new SearchResource());
+        environment.jersey().register(new SearchResource(new InMemoryHardCodedPlaneService()));
     }
 
     public void initialize(Bootstrap<Configuration> bootstrap) {

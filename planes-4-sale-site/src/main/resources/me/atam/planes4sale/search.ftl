@@ -125,7 +125,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     <td class="manufactureDate">${currentPlane.manufactureDate}</td>
                     <td class="reg">${currentPlane.reg}</td>
                     <td class="image"><img src="assets/plane-photos/${currentPlane.imageId}" width="200"/></td>
-                    <td class="contactSeller"><button id="myBtn${currentPlane_index}" type="button" class="btn btn-primary">Contact Seller</button></td>
+                    <td class="contactSeller"><button id="contactSellerButton${currentPlane_index}" type="button" class="btn btn-primary">Contact Seller</button></td>
                 </tr>
 
 
@@ -136,50 +136,78 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
 </div>
-<!-- The Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Modal Header</h2>
-        </div>
-        <div class="modal-body">
-            <p>Some text in the Modal Body</p>
-            <p>Some other text...</p>
-        </div>
-        <div class="modal-footer">
-            <h3>Modal Footer</h3>
+
+<#list planes as currentPlane>
+
+    <!-- The Modal -->
+    <div id="contactSeller${currentPlane_index}" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="closeSpan${currentPlane_index}" class="close">&times;</span>
+                <h2>Contact seller about this ${currentPlane.model}</h2>
+                <img src="assets/plane-photos/${currentPlane.imageId}" width="200"/>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <textarea rows="4" cols="50">Hi, I like the look of your ${currentPlane.model} and am thinking about buying it.  Can we talk?</textarea>
+
+                    <p>Email Address</p>
+                    <input type="text" name="emailAddress" value=""/>
+
+                    <p>Phone Number</p>
+                    <input type="text" name="phoneNumber" value=""/>
+
+                    <input type="hidden" value="${currentPlane.id}"/>
+                    <p></p>
+
+                    <button id="sendMessageButton{currentPlane_index}" type="button" class="btn btn-primary">Send Message</button>
+
+                </form>
+
+            </div>
         </div>
     </div>
-</div>
+
+</#list>
+
 
 <script>
+
+<#list planes as currentPlane>
 // Get the modal
-var modal = document.getElementById('myModal');
+var modal${currentPlane_index} = document.getElementById('contactSeller${currentPlane_index}');
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn1");
+var btn${currentPlane_index} = document.getElementById("contactSellerButton${currentPlane_index}");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span${currentPlane_index} = document.getElementById("closeSpan${currentPlane_index}");
 
 // When the user clicks the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
+btn${currentPlane_index}.onclick = function() {
+  modal${currentPlane_index}.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
+span${currentPlane_index}.onclick = function() {
+  modal${currentPlane_index}.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    modal${currentPlane_index}.style.display = "none";
   }
 }
+
+</#list>
 </script>
+
+
+
+
+
 
 </body>
 </html>

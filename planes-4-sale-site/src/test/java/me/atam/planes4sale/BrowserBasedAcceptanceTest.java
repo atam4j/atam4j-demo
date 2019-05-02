@@ -58,14 +58,20 @@ public class BrowserBasedAcceptanceTest {
                     .usingAnyFreePort()
                     .build();
             service.start();
-            driver = new RemoteWebDriver(service.getUrl(), new ChromeOptions());
+            driver = new RemoteWebDriver(service.getUrl(), getChromeOptions());
             LOGGER.info("Starting started locally");
         }
         else{
             LOGGER.info("Using remote webdriver...");
-            driver = new RemoteWebDriver(new URL(getConfig().getSeleniumRemoteAddress()), new ChromeOptions());
+            driver = new RemoteWebDriver(new URL(getConfig().getSeleniumRemoteAddress()), getChromeOptions());
         }
 
+    }
+
+    private ChromeOptions getChromeOptions() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--user-agent=ACCEPTANCE_TESTS_AS_MONITORS_BROWSER_CHROME");
+        return chromeOptions;
     }
 
     @After

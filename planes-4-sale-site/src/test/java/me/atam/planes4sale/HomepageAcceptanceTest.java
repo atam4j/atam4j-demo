@@ -12,7 +12,7 @@ public class HomepageAcceptanceTest extends BrowserBasedAcceptanceTest {
 
     @Test
     public void homepageHasCorrectTitleAndButtons() {
-
+        //this has EVENT issues
         driver.get(getHomePageAddress());
 
         assertThat(driver.getTitle(), CoreMatchers.is("Planes 4 Sale"));

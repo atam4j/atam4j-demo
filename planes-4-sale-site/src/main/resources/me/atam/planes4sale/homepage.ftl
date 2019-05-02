@@ -40,6 +40,8 @@
 
         </div>
 
+        <p>Photos courtesy of Jonathan Rankin <a href="https://www.airliners.net/user/777219er/profile/photos">https://www.airliners.net/user/777219er/profile/photos</a></p>
+
     </body>
 </html>
 

@@ -21,7 +21,11 @@
     <script type='text/javascript' src='/external-libs/jquery-3.4.1.js'></script>
     <script type='text/javascript' src='/external-libs/underscore-1.9.1.js'></script>
 
-
+    <style>
+        .table td {
+           vertical-align: center;
+        }
+    </style>
 
 </head>
 
@@ -51,10 +55,10 @@
                 <tr >
                     <td class="manufacturer"><span data-bind="text: manufacturer"></span></td>
                     <td class="model"><span data-bind="text: model"></span></td>
-                    <td class="manufactureDate"><span data-bind="text: manufactureDate"></span></td>
+                    <td class="manufactureDate"><span data-bind="text: popupDisplayed"></span></td>
                     <td class="reg"><span data-bind="text: reg"></td>
                     <td class="image" ><img width="300" data-bind="attr:{src: imageURL}" /></td>
-                    <td class="contactSeller"><button id="contactSellerButton" type="button" class="btn btn-primary">Contact Seller</button></td>
+                    <td class="contactSeller"><button data-bind="click: $parent.showPopup"  id="contactSellerButton" type="button" class="btn btn-primary">Contact Seller</button></td>
                 </tr>
 
 

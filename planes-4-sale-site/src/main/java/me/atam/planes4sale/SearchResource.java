@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/search")
-@Produces(MediaType.TEXT_HTML)
+@Produces(MediaType.APPLICATION_JSON)
 public class SearchResource {
 
     private PlaneService planeService;
@@ -18,9 +18,8 @@ public class SearchResource {
     }
 
     @GET
-    public SearchResultsView getSearchResults(@QueryParam("manufacturer") String manufacturer){
-        List<Plane> planesByManufacturer = planeService.getPlanesByManufacturer(manufacturer);
-        return new SearchResultsView(planesByManufacturer);
+    public List<Plane> getSearchResults(@QueryParam("manufacturer") String manufacturer){
+        return planeService.getPlanesByManufacturer(manufacturer);
     }
 
 }

@@ -6,7 +6,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import me.atam.atam4j.Atam4j;
 import me.atam.planes4sale.AcceptanceTestConfigLoader;
-import me.atam.planes4sale.HomepageAcceptanceTest;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;

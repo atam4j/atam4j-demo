@@ -1,8 +1,6 @@
-package me.atam.planes4sale;
+package me.atam.planes4sale.browser;
 
-import io.dropwizard.Configuration;
-import io.dropwizard.testing.DropwizardTestSupport;
-import io.dropwizard.testing.ResourceHelpers;
+import me.atam.planes4sale.AcceptanceTest;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -15,41 +13,19 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.net.URL;
 
-public class BrowserBasedAcceptanceTest {
+public class BrowserBasedAcceptanceTest extends AcceptanceTest {
 
-
-    public static final DropwizardTestSupport<Configuration> RULE;
 
     private static Logger LOGGER = LoggerFactory.getLogger(BrowserBasedAcceptanceTest.class);
     protected RemoteWebDriver driver;
     protected DriverService service;
-
-
-    static {
-        if (AcceptanceTestConfigLoader.getConfig().isManagesDropWizard()) {
-            RULE = new DropwizardTestSupport<>(Planes4SaleApplication.class, ResourceHelpers.resourceFilePath("app-config.yml"));
-
-        } else {
-            RULE = null;
-        }
-    }
-
-    public AcceptanceTestConfig getConfig(){
-        return AcceptanceTestConfigLoader.getConfig();
-    }
-
     protected String getHomePageAddress() {
         return getConfig().getSiteAddress();
     }
 
     @Before
     public void setUp() throws Exception {
-        LOGGER.info("Setup with config: " + getConfig());
-
-        if (getConfig().isManagesDropWizard()){
-            LOGGER.info("Managing Dropwizard. Calling .before()...");
-            RULE.before();
-        }
+        super.setUp();
 
         if(getConfig().isStartSeleniumLocally()){
             LOGGER.info("Starting Selenium locally");
@@ -65,7 +41,6 @@ public class BrowserBasedAcceptanceTest {
             LOGGER.info("Using remote webdriver...");
             driver = new RemoteWebDriver(new URL(getConfig().getSeleniumRemoteAddress()), getChromeOptions());
         }
-
     }
 
     private ChromeOptions getChromeOptions() {
@@ -76,12 +51,7 @@ public class BrowserBasedAcceptanceTest {
 
     @After
     public void tearDown() throws Exception {
-
-        if (getConfig().isManagesDropWizard()){
-            LOGGER.info("Managing Dropwizard. Calling .after()...");
-            RULE.after();
-        }
-
+        super.tearDown();
         driver.quit();
 
         if(getConfig().isStartSeleniumLocally()) {

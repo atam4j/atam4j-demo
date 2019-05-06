@@ -1,4 +1,4 @@
-package me.atam.planes4sale;
+package me.atam.planes4sale.browser;
 
 import me.atam.atam4j.Monitor;
 import org.junit.Test;

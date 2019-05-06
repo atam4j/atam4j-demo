@@ -5,6 +5,12 @@ function SearchResultsViewModel() {
 
     $.get( "/api/search?manufacturer=boeing", function( data ) {
       console.log(data)
+      _.each(data, function(plane){
+        plane.imageURL="/plane-photos/" + plane.imageId + ".jpg";
+        console.log("WOOOO")
+      } )
+      console.log("DONE")
+
       self.planes(data);
     });
 

@@ -19,6 +19,7 @@
 
     <script type='text/javascript' src='/external-libs/knockout-3.5.0.debug.js'></script>
     <script type='text/javascript' src='/external-libs/jquery-3.4.1.js'></script>
+    <script type='text/javascript' src='/external-libs/underscore-1.9.1.js'></script>
 
 
 
@@ -47,17 +48,13 @@
             <tbody data-bind="foreach: planes">
 
 
-
-
-
-
                 <tr >
-                    <td class="manufacturer"><span data-bind="text: manufacturer"> </span></td>
-                    <td class="model"><span data-bind="text: model">  </span></td>
-                    <td class="manufactureDate">-</td>
-                    <td class="reg">-</td>
-                    <td class="image">-</td>
-                    <td class="contactSeller">-</td>
+                    <td class="manufacturer"><span data-bind="text: manufacturer"></span></td>
+                    <td class="model"><span data-bind="text: model"></span></td>
+                    <td class="manufactureDate"><span data-bind="text: manufactureDate"></span></td>
+                    <td class="reg"><span data-bind="text: reg"></td>
+                    <td class="image" ><img width="300" data-bind="attr:{src: imageURL}" /></td>
+                    <td class="contactSeller"><button id="contactSellerButton" type="button" class="btn btn-primary">Contact Seller</button></td>
                 </tr>
 
 

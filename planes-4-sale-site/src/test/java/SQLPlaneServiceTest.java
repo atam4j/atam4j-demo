@@ -37,11 +37,11 @@ public class SQLPlaneServiceTest {
             connection.setAutoCommit(true);
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("CREATE TABLE PLANES (id varchar(255) primary key, manufacturer varchar(255), model varchar(255), manufactureDate varchar(255), imageId varchar(255))");
+                statement.execute("CREATE TABLE PLANES (id varchar(255) primary key, manufacturer varchar(255), model varchar(255), manufactureDate date, imageId varchar(255))");
             }
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("INSERT INTO PLANES (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'boeing', '747-400', '-', '1234.jpg')");
+                statement.execute("INSERT INTO PLANES (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'boeing', '747-400', sysdate, '1234.jpg')");
             }
 
             printAllPlanes(connection);

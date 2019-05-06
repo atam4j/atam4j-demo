@@ -15,17 +15,13 @@ public class SQLPlaneService implements PlaneService {
         jdbi.installPlugin(new SqlObjectPlugin());
 
         // Jdbi implements your interface based on annotations
-        String id = jdbi.withExtension(JDBIPlaneService.class, dao -> {
+        List<Plane> planes = jdbi.withExtension(JDBIPlaneService.class, dao -> {
 
-            String someId = dao.findNameByManufacturer("boeing");
+            List<Plane> thePlanes = dao.findNameByManufacturer("boeing");
 
-            return someId;
+            return thePlanes;
         });
 
-        List<Plane> stuff = new ArrayList<>();
-        LocalDate date = LocalDate.of(1, 1, 1);
-        stuff.add(new Plane(id,"","", date,"",""));
-
-        return stuff;
+        return planes;
     }
 }

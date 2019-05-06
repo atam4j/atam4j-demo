@@ -14,6 +14,8 @@ public class Plane {
     private String imageId;
     private String reg;
 
+    public Plane() {
+    }
 
     public Plane(String id, String manufacturer, String model, LocalDate manufactureDate, String imageId, String reg) {
         this.id = id;
@@ -46,5 +48,41 @@ public class Plane {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setManufactureDate(LocalDate manufactureDate) {
+        this.manufactureDate = manufactureDate;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
+    public void setReg(String reg) {
+        this.reg = reg;
+    }
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "id='" + id + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", model='" + model + '\'' +
+                ", manufactureDate=" + manufactureDate +
+                ", imageId='" + imageId + '\'' +
+                ", reg='" + reg + '\'' +
+                '}';
     }
 }

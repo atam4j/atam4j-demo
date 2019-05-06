@@ -14,7 +14,7 @@ public class SearchAcceptanceTest extends BrowserBasedAcceptanceTest {
 
 
 
-        driver.get(getHomePageAddress());
+        driver.get(getHostAndPort());
         WebElement boeingSearchButton = driver.findElementById("boeingSearchButton");
         boeingSearchButton.click();
         assertThat(driver.getTitle(), is("Planes 4 Sale - Search Results"));

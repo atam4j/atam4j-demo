@@ -11,9 +11,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class HomepageAcceptanceTest extends BrowserBasedAcceptanceTest {
 
     @Test
-    public void homepageHasCorrectTitleAndButtons() {
+    public void canSearchForBoeings() {
         //this has EVENT issues
-        driver.get(getHomePageAddress());
+        driver.get(getHostAndPort());
 
         assertThat(driver.getTitle(), CoreMatchers.is("Planes 4 Sale"));
         WebElement boeingSearchButton = driver.findElementById("boeingSearchButton");

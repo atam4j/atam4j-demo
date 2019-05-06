@@ -19,9 +19,8 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
     private static Logger LOGGER = LoggerFactory.getLogger(BrowserBasedAcceptanceTest.class);
     protected RemoteWebDriver driver;
     protected DriverService service;
-    protected String getHomePageAddress() {
-        return getConfig().getSiteAddress();
-    }
+
+
 
     @Before
     public void setUp() throws Exception {

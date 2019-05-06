@@ -1,13 +1,13 @@
+import me.atam.planes4sale.Plane;
+import me.atam.planes4sale.SQLPlaneService;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-// H2 In-Memory Database Example shows about storing the database contents into memory.
+import java.util.List;
 
 public class SQLPlaneServiceTest {
 
@@ -18,12 +18,20 @@ public class SQLPlaneServiceTest {
 
     @Test
     public void stuff() {
-        insertWithStatement();
+        createTableAndPopulateWithDummyData();
+
+        SQLPlaneService sqlPlaneService = new SQLPlaneService();
+
+        List<Plane> boeing = sqlPlaneService.getPlanesByManufacturer("boeing");
+
+        System.out.println(boeing.get(0));
+
+
         printAllPlanes(getDBConnection());
     }
 
 
-    private static void insertWithStatement() {
+    private static void createTableAndPopulateWithDummyData() {
 
         try (Connection connection = getDBConnection()){
             connection.setAutoCommit(true);
@@ -33,13 +41,10 @@ public class SQLPlaneServiceTest {
             }
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("INSERT INTO PLANES (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'Boeing', '747-400', '-', '1234.jpg')");
+                statement.execute("INSERT INTO PLANES (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'boeing', '747-400', '-', '1234.jpg')");
             }
 
             printAllPlanes(connection);
-
-
-            //stmt.execute("DROP TABLE PLANES");
 
             connection.commit();
 

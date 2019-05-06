@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 public class AcceptanceTest {
 
 
-    public static final DropwizardTestSupport<Configuration> RULE;
+    public static final DropwizardTestSupport<Planes4SaleConfiguration> RULE;
     private static Logger LOGGER = LoggerFactory.getLogger(AcceptanceTest.class);
     static {
         if (AcceptanceTestConfigLoader.getConfig().isManagesDropWizard()) {

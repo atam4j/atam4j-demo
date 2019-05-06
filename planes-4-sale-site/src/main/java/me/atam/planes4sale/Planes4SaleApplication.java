@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Planes4SaleApplication extends Application<Configuration> {
+public class Planes4SaleApplication extends Application<Planes4SaleConfiguration> {
 
     public static void main(String[] args) throws Exception {
         if (args == null || args.length == 0) {
@@ -23,12 +23,12 @@ public class Planes4SaleApplication extends Application<Configuration> {
     }
 
     @Override
-    public void run(Configuration configuration, Environment environment) {
+    public void run(Planes4SaleConfiguration configuration, Environment environment) {
         environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(new SearchResource(new InMemoryHardCodedPlaneService()));
     }
 
-    public void initialize(Bootstrap<Configuration> bootstrap) {
+    public void initialize(Bootstrap<Planes4SaleConfiguration> bootstrap) {
 
 
         bootstrap.addBundle(new AssetsBundle("/assets/", "/", "index.html"));

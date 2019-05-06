@@ -1,10 +1,12 @@
-version: '2'
+version: '2.1'
 services:
   selenium-hub:
     image: selenium/hub:3.141.59-bismuth
     container_name: selenium-hub
     ports:
-      - "4444:4444"
+      - 4444:4444
+    networks:
+      - planes-4-sale-net
   chrome:
     image: selenium/node-chrome:3.141.59-bismuth
     depends_on:
@@ -13,11 +15,15 @@ services:
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
+    networks:
+      - planes-4-sale-net
   planes-4-sale-site:
     build: planes-4-sale-site/.
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - 8080:8080
+      - 8081:8081
+    networks:
+      - planes-4-sale-net
   planes-4-sale-accepance-test-monitors:
     build: acceptance-tests-as-monitors/.
     depends_on:
@@ -26,5 +32,81 @@ services:
     volumes:
       - /dev/shm:/dev/shm
     ports:
-      - "9090:9090"
-      - "9091:9091"
+      - 9092:9090
+      - 9091:9091
+    networks:
+        - planes-4-sale-net
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./config:/prometheus
+      - ./data/prometheus:/data
+    command:
+      - '--config.file=/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/data'
+    ports:
+      - 9090:9090
+    depends_on:
+      - alertmanager
+    restart: always
+    networks:
+      - planes-4-sale-net
+
+  alertmanager:
+    image: prom/alertmanager
+    volumes:
+      - ./config:/prometheus
+      - ./data/alertmanager:/data
+    command:
+      - '--config.file=/prometheus/alertmanager.yml'
+      - '--storage.path=/data'
+    ports:
+      - 9093:9093
+    networks:
+      - planes-4-sale-net
+
+  cadvisor:
+    image: google/cadvisor
+    ports:
+      - 9880:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - planes-4-sale-net
+
+  alerta:
+    image: alerta/alerta-web
+    ports:
+      - 9080:8080
+    depends_on:
+      - db
+    environment:
+      - DEBUG=1  # remove this line to turn DEBUG off
+      - DATABASE_URL=mongodb://db:27017/monitoring
+      - AUTH_REQUIRED=False
+      - ADMIN_USERS=admin@alerta.io
+      - ALLOWED_EMAIL_DOMAIN=${ALLOWED_EMAIL_DOMAIN:-*}
+      - PLUGINS=reject,heartbeat,blackout,prometheus
+      - INSTALL_PLUGINS=prometheus
+      - ALERTMANAGER_API_URL=http://alertmanager:9093
+    restart: always
+    networks:
+      - planes-4-sale-net
+      - dbnet
+
+  db:
+    image: mongo
+    volumes:
+      - ./data/mongodb:/data/db
+    restart: always
+    networks:
+      - dbnet
+
+networks:
+  planes-4-sale-net:
+    driver: bridge
+  dbnet:
+    driver: bridge

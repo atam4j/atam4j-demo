@@ -18,6 +18,8 @@
     <link href="/external-libs/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
 
     <script type='text/javascript' src='/external-libs/knockout-3.5.0.debug.js'></script>
+    <script type='text/javascript' src='/external-libs/jquery-3.4.1.js'></script>
+
 
 
 </head>
@@ -42,67 +44,36 @@
                     <th scope="col">Contact</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody data-bind="foreach: planes">
 
-                <#list planes as currentPlane>
-                <tr id="plane-${currentPlane_index}">
-                    <td class="manufacturer">${currentPlane.manufacturer} </td>
-                    <td class="model">${currentPlane.model}</td>
-                    <td class="manufactureDate">${currentPlane.manufactureDate}</td>
-                    <td class="reg">${currentPlane.reg}</td>
-                    <td class="image"><img src="assets/plane-photos/${currentPlane.imageId}" width="200"/></td>
-                    <td class="contactSeller"><button id="contactSellerButton${currentPlane_index}" type="button" class="btn btn-primary">Contact Seller</button></td>
+
+
+
+
+
+                <tr >
+                    <td class="manufacturer"><span data-bind="text: manufacturer"> </span></td>
+                    <td class="model"><span data-bind="text: model">  </span></td>
+                    <td class="manufactureDate">-</td>
+                    <td class="reg">-</td>
+                    <td class="image">-</td>
+                    <td class="contactSeller">-</td>
                 </tr>
 
 
 
-                </#list>
+
             </tbody>
         </table>
 
 
 </div>
 
-<#list planes as currentPlane>
-
-    <!-- The Modal -->
-    <div id="contactSeller${currentPlane_index}" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span id="closeSpan${currentPlane_index}" class="close">&times;</span>
-                <h2>Contact seller about this ${currentPlane.model}</h2>
-                <img src="assets/plane-photos/${currentPlane.imageId}" width="200"/>
-            </div>
-            <div class="modal-body">
-                <form>
-
-                    <textarea rows="4" cols="50">Hi, I like the look of your ${currentPlane.model} and am thinking about buying it.  Can we talk?</textarea>
-
-                    <p>Email Address</p>
-                    <input type="text" name="emailAddress" value=""/>
-
-                    <p>Phone Number</p>
-                    <input type="text" name="phoneNumber" value=""/>
-
-                    <input type="hidden" value="${currentPlane.id}"/>
-                    <p></p>
-
-                    <button id="sendMessageButton{currentPlane_index}" type="button" class="btn btn-primary">Send Message</button>
-
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-</#list>
 
 <p>Photos courtesy of Jonathan Rankin <a href="https://www.airliners.net/user/777219er/profile/photos">https://www.airliners.net/user/777219er/profile/photos</a></p>
 
 
-<script>
-
-</script>
+    <script type='text/javascript' src='/js/searchResults.js'></script>
 
 
 

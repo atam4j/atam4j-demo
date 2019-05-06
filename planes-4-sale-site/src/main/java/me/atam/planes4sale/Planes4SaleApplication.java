@@ -24,12 +24,17 @@ public class Planes4SaleApplication extends Application<Configuration> {
 
     @Override
     public void run(Configuration configuration, Environment environment) {
-        environment.jersey().register(new HomepageResource());
+        environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(new SearchResource(new InMemoryHardCodedPlaneService()));
     }
 
     public void initialize(Bootstrap<Configuration> bootstrap) {
-        bootstrap.addBundle(new AssetsBundle());
+
+
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/", "index.html"));
+
+
+
         bootstrap.addBundle(new ViewBundle<Configuration>() {
             @Override
             public Map<String, Map<String, String>> getViewConfiguration(Configuration config) {

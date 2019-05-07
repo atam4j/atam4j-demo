@@ -12,3 +12,5 @@ public interface JDBIPlaneService {
     @RegisterBeanMapper(Plane.class)
     List<Plane> findNameByManufacturer(@Bind("manufacturer") String manufacturer);
 }
+
+

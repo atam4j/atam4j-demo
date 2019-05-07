@@ -14,8 +14,7 @@ public class AcceptanceTest {
     private static Logger LOGGER = LoggerFactory.getLogger(AcceptanceTest.class);
     static {
         if (AcceptanceTestConfigLoader.getConfig().isManagesDropWizard()) {
-            RULE = new DropwizardTestSupport<>(Planes4SaleApplication.class, ResourceHelpers.resourceFilePath("app-config.yml"));
-
+            RULE = new DropwizardTestSupport<>(Planes4SaleApplication.class, ResourceHelpers.resourceFilePath("app-config-local.yml"));
         } else {
             RULE = null;
         }

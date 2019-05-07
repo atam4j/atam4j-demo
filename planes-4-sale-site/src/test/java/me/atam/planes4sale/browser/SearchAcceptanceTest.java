@@ -11,9 +11,6 @@ public class SearchAcceptanceTest extends BrowserBasedAcceptanceTest {
 
     @Test
     public void canSearchForBoeings() {
-
-
-
         driver.get(getHostAndPort());
         WebElement boeingSearchButton = driver.findElementById("boeingSearchButton");
         boeingSearchButton.click();

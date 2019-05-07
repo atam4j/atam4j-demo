@@ -1,0 +1,1 @@
+INSERT INTO PLANES (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'Boeing', '747-400', null, '1234.jpg')

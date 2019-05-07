@@ -1,5 +1,7 @@
 import me.atam.planes4sale.Plane;
 import me.atam.planes4sale.SQLPlaneService;
+import org.hamcrest.CoreMatchers;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -7,7 +9,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SQLPlaneServiceTest {
 
@@ -17,21 +23,43 @@ public class SQLPlaneServiceTest {
     private static final String DB_PASSWORD = "";
 
     @Test
-    public void stuff() {
-        createTableAndPopulateWithDummyData();
+    public void canRetrieveBoeingPlanes() {
 
         SQLPlaneService sqlPlaneService = new SQLPlaneService();
 
-        List<Plane> boeing = sqlPlaneService.getPlanesByManufacturer("boeing");
+        List<Plane> list = sqlPlaneService.getPlanesByManufacturer("Boeing");
+        assertThat(list.size(), is(1));
+        Plane plane = list.get(0);
+        assertThat(plane.getId(), is("123"));
+        assertThat(plane.getManufacturer(), is("Boeing"));
+        assertThat(plane.getManufactureDate(), is(LocalDate.now()));
+        assertThat(plane.getImageId(), is("1234.jpg"));
+    }
 
-        System.out.println(boeing.get(0));
+    @Test
+    public void canRetrieveBoeingPlanesCaseInsensitive() {
 
+        SQLPlaneService sqlPlaneService = new SQLPlaneService();
 
-        printAllPlanes(getDBConnection());
+        List<Plane> list = sqlPlaneService.getPlanesByManufacturer("BoEinG");
+        assertThat(list.size(), is(1));
+        Plane plane = list.get(0);
+        assertThat(plane.getId(), is("123"));
+        assertThat(plane.getManufacturer(), is("Boeing"));
+        assertThat(plane.getManufactureDate(), is(LocalDate.now()));
+        assertThat(plane.getImageId(), is("1234.jpg"));
+    }
+
+    @Test
+    public void returnseroRowsWhenNone() {
+        SQLPlaneService sqlPlaneService = new SQLPlaneService();
+        List<Plane> planes = sqlPlaneService.getPlanesByManufacturer("unknown");
+        assertThat(planes.size(), is(0));
     }
 
 
-    private static void createTableAndPopulateWithDummyData() {
+    @BeforeClass
+    public static void createTableAndPopulateWithDummyData() {
 
         try (Connection connection = getDBConnection()){
             connection.setAutoCommit(true);
@@ -41,7 +69,7 @@ public class SQLPlaneServiceTest {
             }
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("INSERT INTO PLANES (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'boeing', '747-400', sysdate, '1234.jpg')");
+                statement.execute("INSERT INTO PLANES (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'Boeing', '747-400', sysdate, '1234.jpg')");
             }
 
             printAllPlanes(connection);

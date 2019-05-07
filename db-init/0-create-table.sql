@@ -1,0 +1,1 @@
+CREATE TABLE PLANES (id varchar(255) primary key, manufacturer varchar(255), model varchar(255), manufactureDate date, imageId varchar(255));

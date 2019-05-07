@@ -23,4 +23,5 @@ public class Planes4SaleConfiguration extends Configuration {
         return database;
     }
 
+
 }

@@ -1,6 +1,5 @@
 package me.atam.planes4sale;
 
-import io.dropwizard.Configuration;
 import io.dropwizard.testing.DropwizardTestSupport;
 import io.dropwizard.testing.ResourceHelpers;
 import org.junit.After;

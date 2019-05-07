@@ -23,16 +23,16 @@ logging:
 
 database:
   # the name of your JDBC driver
-  driverClass: org.h2.Driver
+  driverClass: com.mysql.cj.jdbc.Driver
 
   # the username
-  user:
+  user: planes
 
   # the password
-  password:
+  password: password
 
   # the JDBC URL
-  url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+  url: jdbc:mysql://localhost:3306/planes
 
   # any properties specific to your JDBC driver:
   properties:

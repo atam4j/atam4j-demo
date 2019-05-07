@@ -11,15 +11,15 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class SearchResource {
 
-    private PlaneService planeService;
+    private JDBIPlaneService planeService;
 
-    public SearchResource(PlaneService planeService) {
+    public SearchResource(JDBIPlaneService planeService) {
         this.planeService = planeService;
     }
 
     @GET
     public List<Plane> getSearchResults(@QueryParam("manufacturer") String manufacturer){
-        return planeService.getPlanesByManufacturer(manufacturer);
+        return planeService.findNameByManufacturer(manufacturer);
     }
 
 }

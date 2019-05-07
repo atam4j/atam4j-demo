@@ -4,9 +4,11 @@ import com.google.common.io.Resources;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.assets.AssetsBundle;
+import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
+import org.jdbi.v3.core.Jdbi;
 
 import java.io.File;
 import java.util.HashMap;
@@ -24,8 +26,13 @@ public class Planes4SaleApplication extends Application<Planes4SaleConfiguration
 
     @Override
     public void run(Planes4SaleConfiguration configuration, Environment environment) {
+
+        final JdbiFactory factory = new JdbiFactory();
+        final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "database");
+        final JDBIPlaneService planeService = jdbi.onDemand(JDBIPlaneService.class);
+
         environment.jersey().setUrlPattern("/api/*");
-        environment.jersey().register(new SearchResource(new InMemoryHardCodedPlaneService()));
+        environment.jersey().register(new SearchResource(planeService));
     }
 
     public void initialize(Bootstrap<Planes4SaleConfiguration> bootstrap) {

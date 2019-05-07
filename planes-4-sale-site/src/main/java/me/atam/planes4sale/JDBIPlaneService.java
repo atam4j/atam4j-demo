@@ -6,10 +6,10 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 
 import java.util.List;
 
-public interface JDBIPlaneService {
+public interface JDBIPlaneService  {
 
-    @SqlQuery("select * from planes where lower(manufacturer) = :manufacturer")
     @RegisterBeanMapper(Plane.class)
+    @SqlQuery("select * from planes where lower(manufacturer) = :manufacturer")
     List<Plane> findNameByManufacturer(@Bind("manufacturer") String manufacturer);
 }
 

@@ -1,1 +1,3 @@
-INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'Boeing', '747-400', curdate(), '1234.jpg')
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('bfe8a680', 'Boeing', '777-319/ER', curdate(), '1836933', 'ZK-OKM');
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('9fc2a9c9', 'Boeing', '777-31B/ER', curdate(), '2833243', 'B-2049');
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('fa8983a3', 'Airbus', 'A340-541', curdate(), '1360015', 'A6-ERD');

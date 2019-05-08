@@ -9,9 +9,15 @@ function SearchResultsViewModel() {
         console.log("THE REG IS " + this.reg);
         this.popupDisplayed(true);
 
-        console.log("The current selected plane was: " + self.currentSelectedPlane.reg);
-        self.currentSelectedPlane = this;
-        console.log("Th current selected plane NOW is: " + self.currentSelectedPlane.reg);
+        if (self.currentSelectedPlane()){
+            console.log("The current selected plane was: " + self.currentSelectedPlane().reg);
+
+        }
+        else{
+            console.log("No plane was selected before this")
+        }
+        self.currentSelectedPlane(this);
+        console.log("Th current selected plane NOW is: " + self.currentSelectedPlane().reg);
 
     };
 

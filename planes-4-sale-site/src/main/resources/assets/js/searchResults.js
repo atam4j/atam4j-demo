@@ -5,6 +5,8 @@ function SearchResultsViewModel() {
 
     self.currentSelectedPlane = ko.observable();
 
+
+
     self.showPopup = function (){
         console.log("THE REG IS " + this.reg);
         this.popupDisplayed(true);
@@ -19,12 +21,16 @@ function SearchResultsViewModel() {
         self.currentSelectedPlane(this);
         console.log("Th current selected plane NOW is: " + self.currentSelectedPlane().reg);
 
+        //dirty
+        $('#contactSellerModal').modal('show')
+
     };
 
-    self.popupShouldBeDisplayed = function(){
-        console.log("HELP ME");
-        return true;
-    }
+
+
+    self.popupShouldBeDisplayed = ko.computed(function(){
+        return self.currentSelectedPlane();
+    });
 
     $.get( "/api/search?manufacturer=boeing", function( data ) {
 

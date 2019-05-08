@@ -79,14 +79,25 @@
                 <div data-bind="with: currentSelectedPlane" class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><span data-bind="text: reg"></h4>
+                        <h4 class="modal-title">Contact seller about this <span data-bind="text: model"></h4>
                     </div>
                     <div class="modal-body">
-                        <p>One fine body&hellip;</p>
+                        <form>
+
+                            <p>Message</p>
+                            <textarea rows="4" cols="50" data-bind="value: $parent.contactSellerMessage"></textarea>
+
+                            <p>Email Address</p>
+                            <input type="text" name="emailAddress" data-bind="value: $parent.contactSellerEmail" value=""/>
+
+                            <p>Phone Number</p>
+                            <input type="text" name="phoneNumber" data-bind="value: $parent.contactSellerNumber" value=""/>
+
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" data-bind="click: $parent.contactSeller" class="btn btn-primary">Contact seller</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -95,11 +106,9 @@
 
 </div>
 
-<p>STUFF</p>
-    <td class="manufacturer"><span data-bind="text: currentSelectedPlane.reg"></span></td>
-<p>MORE STUFF</p>
 
-<p>Photos courtesy of Jonathan Rankin <a href="https://www.airliners.net/user/777219er/profile/photos">https://www.airliners.net/user/777219er/profile/photos</a></p>
+
+<h4 align="right">Photos courtesy of Jonathan Rankin <a href="https://www.airliners.net/user/777219er/profile/photos">https://www.airliners.net/user/777219er/profile/photos</a></h4>
 
 
 <script type='text/javascript' src='/js/searchResults.js'></script>

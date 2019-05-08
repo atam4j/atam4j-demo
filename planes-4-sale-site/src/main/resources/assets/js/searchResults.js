@@ -5,6 +5,47 @@ function SearchResultsViewModel() {
 
     self.currentSelectedPlane = ko.observable();
 
+    self.contactSellerMessage = ko.observable("Hi, I like the look of your plane.  Can we talk?");
+    self.contactSellerEmail = ko.observable("youremail@address.com");
+    self.contactSellerNumber = ko.observable("0000");
+
+
+    self.contactSeller = function(){
+
+        payload = {
+            planeId: self.currentSelectedPlane().id,
+            buyerMessage :  self.contactSellerMessage(),
+            buyerEmail :  self.contactSellerEmail(),
+            buyerNumber :  self.contactSellerNumber()
+        }
+
+
+
+
+        $.ajax({
+            type: 'POST',
+            url:  "/api/plane/" + self.currentSelectedPlane().id + "/contactseller",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(payload)
+        }).done(function(){
+            console.log("DONE");
+
+            $('#contactSellerModal').modal('hide')
+        });
+
+
+
+
+
+            /*
+            $.post('http://example.com/form.php', {category:'client', type:'premium'}, function(response){
+                  alert("success");
+                  $("#mypar").html(response.amount);
+            });
+            */
+
+    }
 
 
     self.showPopup = function (){
@@ -21,7 +62,7 @@ function SearchResultsViewModel() {
         self.currentSelectedPlane(this);
         console.log("Th current selected plane NOW is: " + self.currentSelectedPlane().reg);
 
-        //dirty
+        //js shouldn't reference dom - bit of a hack!
         $('#contactSellerModal').modal('show')
 
     };

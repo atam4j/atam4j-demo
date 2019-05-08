@@ -33,6 +33,7 @@ public class Planes4SaleApplication extends Application<Planes4SaleConfiguration
 
         environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(new SearchResource(planeService));
+        environment.jersey().register(new ContactSellerResource());
     }
 
     public void initialize(Bootstrap<Planes4SaleConfiguration> bootstrap) {

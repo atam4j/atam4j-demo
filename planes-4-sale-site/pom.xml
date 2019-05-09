@@ -59,7 +59,7 @@
 
         <!--Test Dependencies-->
 
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -116,6 +116,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <classpathDependencyExcludes>
+                        <classpathDependencyExcludes>ch.qos.logback:logback-classic</classpathDependencyExcludes>
+                    </classpathDependencyExcludes>
+                </configuration>
             </plugin>
 
         </plugins>

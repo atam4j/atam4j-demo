@@ -10,6 +10,7 @@ public class H2StubbedDatabase {
     public static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
     private static final String DB_USER = "";
     private static final String DB_PASSWORD = "";
+    public static final String KNOWN_PLANE_ID = "123";
 
     @BeforeClass
     public static void createTableAndPopulateWithDummyData() {
@@ -22,7 +23,7 @@ public class H2StubbedDatabase {
             }
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId) VALUES('123', 'Boeing', '747-400', sysdate, '1234.jpg')");
+                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId) VALUES('" + KNOWN_PLANE_ID + "', 'Boeing', '747-400', sysdate, '1234.jpg')");
             }
 
             printAllPlanes(connection);

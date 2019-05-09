@@ -17,10 +17,4 @@ public class ContactSellerResource {
     }
 
 
-    @GET
-    @Path("/stuff")
-    public Response stuff(){
-        return Response.ok().build();
-    }
-
 }

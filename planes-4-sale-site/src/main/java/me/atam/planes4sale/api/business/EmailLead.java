@@ -17,6 +17,29 @@ public class EmailLead {
         this.sellerEmail = sellerEmail;
     }
 
+    public EmailLead() {
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setBuyerEmail(String buyerEmail) {
+        this.buyerEmail = buyerEmail;
+    }
+
+    public void setPlaneId(String planeId) {
+        this.planeId = planeId;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
+    }
+
     public String getBuyerEmail() {
         return buyerEmail;
     }
@@ -35,5 +58,16 @@ public class EmailLead {
 
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "EmailLead{" +
+                "id='" + id + '\'' +
+                ", buyerEmail='" + buyerEmail + '\'' +
+                ", planeId='" + planeId + '\'' +
+                ", message='" + message + '\'' +
+                ", sellerEmail='" + sellerEmail + '\'' +
+                '}';
     }
 }

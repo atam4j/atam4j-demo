@@ -1,8 +1,7 @@
 package me.atam.planes4sale.api.business;
 
-import me.atam.planes4sale.Plane;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
-import org.jdbi.v3.sqlobject.customizer.BindFields;
+import org.jdbi.v3.sqlobject.customizer.BindMethods;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
@@ -14,8 +13,7 @@ public interface JDBIEmailLeadsService {
     @SqlQuery("select * from emailleads")
     List<EmailLead> getAllEmailLeads();
 
-    @RegisterBeanMapper(EmailLead.class)
-    @SqlUpdate("insert into emailleads (id , buyerEmail , planeId , message, sellerEmail)")
-    void addEmailLead(@BindFields EmailLead emailLead);
+    @SqlUpdate("insert into emailleads (id, buyerEmail , planeId , message, sellerEmail) values (:getId, :getBuyerEmail, :getPlaneId, :getMessage, :getSellerEmail )")
+    void addEmailLead(@BindMethods EmailLead emailLead);
 
 }

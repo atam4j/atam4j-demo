@@ -9,6 +9,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 import me.atam.planes4sale.api.ContactSellerResource;
+import me.atam.planes4sale.api.EmailSendingService;
 import me.atam.planes4sale.api.SearchResource;
 import me.atam.planes4sale.api.business.EmailLeadResource;
 import me.atam.planes4sale.api.business.JDBIEmailLeadsService;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 public class Planes4SaleApplication extends Application<Planes4SaleConfiguration> {
 
+    //To run Locally, run LocalLauncherWithH2.main()
     public static void main(String[] args) throws Exception {
         if (args == null || args.length == 0) {
             args = new String[]{"server", new File(Resources.getResource("app-config.yml").toURI()).getAbsolutePath()};
@@ -38,7 +40,7 @@ public class Planes4SaleApplication extends Application<Planes4SaleConfiguration
 
         environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(new SearchResource(planeService));
-        environment.jersey().register(new ContactSellerResource(emailLeadService));
+        environment.jersey().register(new ContactSellerResource(emailLeadService, new EmailSendingService()));
         environment.jersey().register(new EmailLeadResource(emailLeadService));
     }
 

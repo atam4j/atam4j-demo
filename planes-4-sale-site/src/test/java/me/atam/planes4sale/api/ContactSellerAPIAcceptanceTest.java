@@ -34,7 +34,6 @@ public class ContactSellerAPIAcceptanceTest extends AcceptanceTest {
         Invocation.Builder invocationBuilder = searchTarget.request(MediaType.APPLICATION_JSON);
 
         ContactSellerRequest request = new ContactSellerRequest(
-                KNOWN_PLANE_ID,
                 "Here is my messaue!" + uuidForEmail,
                 "buyer@buyer.com",
                 "555 1234");

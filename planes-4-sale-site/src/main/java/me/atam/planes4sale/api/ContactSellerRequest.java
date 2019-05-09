@@ -1,22 +1,21 @@
 package me.atam.planes4sale.api;
 
+import me.atam.planes4sale.api.business.EmailLead;
+
 public class ContactSellerRequest {
 
-    private String planeId;
     private String buyerMessage;
     private String buyerEmail;
     private String buyerNumber;
 
 
-    public ContactSellerRequest(String planeId, String buyerMessage, String buyerEmail, String buyerNumber) {
-        this.planeId = planeId;
+    public ContactSellerRequest(String buyerMessage, String buyerEmail, String buyerNumber) {
         this.buyerMessage = buyerMessage;
         this.buyerEmail = buyerEmail;
         this.buyerNumber = buyerNumber;
     }
 
-    public String getPlaneId() {
-        return planeId;
+    public ContactSellerRequest() {
     }
 
     public String getBuyerMessage() {
@@ -29,6 +28,10 @@ public class ContactSellerRequest {
 
     public String getBuyerNumber() {
         return buyerNumber;
+    }
+
+    public EmailLead toEmailLead(String planeId, String sellerEmail){
+        return new EmailLead(buyerEmail, planeId, buyerMessage, sellerEmail);
     }
 
 

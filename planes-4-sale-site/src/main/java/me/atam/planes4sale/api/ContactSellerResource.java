@@ -14,17 +14,21 @@ public class ContactSellerResource {
 
 
     private JDBIEmailLeadsService emailLeadsService;
+    private EmailSendingService emailSendingService;
 
-    public ContactSellerResource(JDBIEmailLeadsService emailLeadsService) {
+    public ContactSellerResource(JDBIEmailLeadsService emailLeadsService, EmailSendingService emailSendingService) {
         this.emailLeadsService = emailLeadsService;
+        this.emailSendingService = emailSendingService;
     }
 
     @Path("/{planeId}/contactseller")
     @POST
-    public Response contactSeller(@PathParam("planeId") String planeId){
+    public Response contactSeller(@PathParam("planeId") String planeId, ContactSellerRequest request){
 
-        emailLeadsService.addEmailLead(new EmailLead("dsfasdfasdf", "asfsdfdsf", "asdfasdf", "asdfasdasdf"));
-        System.out.println("Contact seller about " + planeId);
+        //TODO get seller mail
+        EmailLead emailLead = request.toEmailLead(planeId, "sellerMail");
+        emailSendingService.sendEmail(emailLead);
+        emailLeadsService.addEmailLead(emailLead);
         return Response.ok().build();
     }
 

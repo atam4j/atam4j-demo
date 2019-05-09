@@ -21,19 +21,14 @@ public class H2StubbedDatabase {
             try(Statement statement = connection.createStatement()){
                 statement.execute("DROP TABLE IF EXISTS planes");
                 statement.execute("CREATE TABLE planes (id varchar(255) primary key, manufacturer varchar(255), model varchar(255), manufactureDate date, imageId varchar(255), reg varchar(255))");
+                statement.execute("DROP TABLE IF EXISTS emailleads");
+                statement.execute("CREATE TABLE emailleads (id varchar(255) primary key, buyerEmail varchar(255), planeId varchar(255), message varchar(1000), sellerEmail varchar(255));");
             }
 
             try(Statement statement = connection.createStatement()){
                 statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('bfe8a680', 'BOEING', '777-319/ER', DATE '2010-12-01', '1836933', 'ZK-OKM')");
                 statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('9fc2a9c9', 'BOEING', '777-31B/ER', DATE '2015-12-01', '2833243','B-2049')");
                 statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('fa8983a3', 'AIRBUS', 'A340-541',   DATE '2003-12-01', '1360015', 'A6-ERD')");
-
-                /*
-this.planes.add(new Plane("bfe8a680", BOEING, "777-319/ER", LocalDate.of(2010, Month.DECEMBER, 1), "1836933", "ZK-OKM" ));
-this.planes.add(new Plane("9fc2a9c9", BOEING, "777-31B/ER", LocalDate.of(2015, Month.DECEMBER, 1), "2833243", "B-2049" ));
-this.planes.add(new Plane("fa8983a3", AIRBUS, "A340-541", LocalDate.of(2003, Month.DECEMBER, 1), "1360015", "A6-ERD" ));
-                 */
-
 
             }
 

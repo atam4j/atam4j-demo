@@ -52,25 +52,14 @@
                 </tr>
             </thead>
             <tbody data-bind="foreach: planes">
-
-
-                <tr >
+                <tr data-bind="id: index">
                     <td class="manufacturer"><span data-bind="text: manufacturer"></span></td>
                     <td class="model"><span data-bind="text: model"></span></td>
                     <td class="manufactureDate"><span data-bind="text: popupDisplayed"></span></td>
                     <td class="reg"><span data-bind="text: reg"></td>
                     <td class="image" ><img width="300" data-bind="attr:{src: imageURL}" /></td>
                     <td class="contactSeller"><button data-bind="click: $parent.showPopup"  id="contactSellerButton" type="button" class="btn btn-primary">Contact Seller</button></td>
-
-
-
                 </tr>
-
-
-
-
-
-
             </tbody>
         </table>
 

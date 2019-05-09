@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AcceptanceTest {
+public abstract class AcceptanceTest {
 
 
     public static final DropwizardTestSupport<Planes4SaleConfiguration> RULE;
@@ -29,20 +29,21 @@ public class AcceptanceTest {
         return getConfig().getSiteAddress();
     }
 
-    @After
-    public void tearDown() throws Exception{
-        if (getConfig().isManagesDropWizard()){
-            LOGGER.info("Managing Dropwizard. Calling .after()...");
-            RULE.after();
-        }
-    }
-
     @Before
     public void setUp() throws Exception{
         LOGGER.info("Setup with config: " + getConfig());
         if (getConfig().isManagesDropWizard()){
             LOGGER.info("Managing Dropwizard. Calling .before()...");
+            H2StubbedDatabase.resetAndRecreatePlanesDatabase();
             RULE.before();
+        }
+    }
+
+    @After
+    public void tearDown() throws Exception{
+        if (getConfig().isManagesDropWizard()){
+            LOGGER.info("Managing Dropwizard. Calling .after()...");
+            RULE.after();
         }
     }
 }

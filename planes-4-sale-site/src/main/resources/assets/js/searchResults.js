@@ -73,11 +73,15 @@ function SearchResultsViewModel() {
         return self.currentSelectedPlane();
     });
 
+    //TODO make manufacuturer come from url param
     $.get( "/api/public/search?manufacturer=boeing", function( data ) {
 
-      self.planes(_.map(data, function(plane ){
+      self.planes(_.map(data, function(plane, counter ){
         plane.imageURL="/plane-photos/" + plane.imageId + ".jpg";
         plane.popupDisplayed = ko.observable(false);
+        plane.index= "plane-" + counter;
+
+
         var thePlane = ko.observable(plane);
         return thePlane;
       }

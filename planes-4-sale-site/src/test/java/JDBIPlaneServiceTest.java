@@ -1,9 +1,6 @@
-import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.jdbi3.JdbiFactory;
 import me.atam.planes4sale.H2StubbedDatabase;
 import me.atam.planes4sale.JDBIPlaneService;
 import me.atam.planes4sale.Plane;
-import me.atam.planes4sale.SQLPlaneService;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.h2.H2DatabasePlugin;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
@@ -23,7 +20,7 @@ public class JDBIPlaneServiceTest {
 
     @BeforeClass
     public static void setupDB(){
-        H2StubbedDatabase.createTableAndPopulateWithDummyData();
+        H2StubbedDatabase.resetAndRecreatePlanesDatabase();
     }
 
     @Before

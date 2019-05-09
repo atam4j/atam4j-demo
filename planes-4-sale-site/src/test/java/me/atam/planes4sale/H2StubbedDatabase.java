@@ -1,32 +1,41 @@
 package me.atam.planes4sale;
 
-import org.junit.BeforeClass;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class H2StubbedDatabase {
 
     private static final String DB_DRIVER = "org.h2.Driver";
     public static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "";
-    private static final String DB_PASSWORD = "";
-    public static final String KNOWN_PLANE_ID = "123";
+    private static final String DB_USER = "planes";
+    private static final String DB_PASSWORD = "password";
+    public static final String KNOWN_PLANE_ID = "bfe8a680";
 
-    @BeforeClass
-    public static void createTableAndPopulateWithDummyData() {
+    public static void resetAndRecreatePlanesDatabase() {
 
         try (Connection connection = getDBConnection()){
             connection.setAutoCommit(true);
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("CREATE TABLE planes (id varchar(255) primary key, manufacturer varchar(255), model varchar(255), manufactureDate date, imageId varchar(255))");
+                statement.execute("DROP TABLE IF EXISTS planes");
+                statement.execute("CREATE TABLE planes (id varchar(255) primary key, manufacturer varchar(255), model varchar(255), manufactureDate date, imageId varchar(255), reg varchar(255))");
             }
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId) VALUES('" + KNOWN_PLANE_ID + "', 'Boeing', '747-400', sysdate, '1234.jpg')");
-            }
+                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('bfe8a680', 'BOEING', '777-319/ER', DATE '2010-12-01', '1836933', 'ZK-OKM')");
+                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('9fc2a9c9', 'BOEING', '777-31B/ER', DATE '2015-12-01', '2833243','B-2049')");
+                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg) VALUES('fa8983a3', 'AIRBUS', 'A340-541',   DATE '2003-12-01', '1360015', 'A6-ERD')");
 
-            printAllPlanes(connection);
+                /*
+this.planes.add(new Plane("bfe8a680", BOEING, "777-319/ER", LocalDate.of(2010, Month.DECEMBER, 1), "1836933", "ZK-OKM" ));
+this.planes.add(new Plane("9fc2a9c9", BOEING, "777-31B/ER", LocalDate.of(2015, Month.DECEMBER, 1), "2833243", "B-2049" ));
+this.planes.add(new Plane("fa8983a3", AIRBUS, "A340-541", LocalDate.of(2003, Month.DECEMBER, 1), "1360015", "A6-ERD" ));
+                 */
+
+
+            }
 
             connection.commit();
 
@@ -51,16 +60,4 @@ public class H2StubbedDatabase {
         return dbConnection;
     }
 
-    private static void printAllPlanes(Connection connection) {
-        try(Statement statement = connection.createStatement()){
-            ResultSet rs = statement.executeQuery("select * from planes");
-            System.out.println("H2 In-Memory Database inserted through Statement");
-            while (rs.next()) {
-                System.out.println("Id " + rs.getString("id") + " Manufacturer " + rs.getString("manufacturer") + " Model " + rs.getString("model"));
-            }
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

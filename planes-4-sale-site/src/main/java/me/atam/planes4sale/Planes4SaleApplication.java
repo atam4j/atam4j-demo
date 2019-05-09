@@ -8,6 +8,9 @@ import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
+import me.atam.planes4sale.api.ContactSellerResource;
+import me.atam.planes4sale.api.SearchResource;
+import me.atam.planes4sale.api.business.EmailLeadResource;
 import org.jdbi.v3.core.Jdbi;
 
 import java.io.File;
@@ -34,6 +37,7 @@ public class Planes4SaleApplication extends Application<Planes4SaleConfiguration
         environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(new SearchResource(planeService));
         environment.jersey().register(new ContactSellerResource());
+        environment.jersey().register(new EmailLeadResource());
     }
 
     public void initialize(Bootstrap<Planes4SaleConfiguration> bootstrap) {

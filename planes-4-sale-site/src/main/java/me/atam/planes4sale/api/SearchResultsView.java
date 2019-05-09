@@ -1,6 +1,7 @@
-package me.atam.planes4sale;
+package me.atam.planes4sale.api;
 
 import io.dropwizard.views.View;
+import me.atam.planes4sale.Plane;
 
 import java.util.List;
 

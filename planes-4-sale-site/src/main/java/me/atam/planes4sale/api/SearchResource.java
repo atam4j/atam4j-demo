@@ -1,4 +1,7 @@
-package me.atam.planes4sale;
+package me.atam.planes4sale.api;
+
+import me.atam.planes4sale.JDBIPlaneService;
+import me.atam.planes4sale.Plane;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -7,7 +10,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/search")
+@Path("/public/search")
 @Produces(MediaType.APPLICATION_JSON)
 public class SearchResource {
 

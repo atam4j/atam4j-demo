@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="" type=" me.atam.planes4sale.SearchResultsView" -->
+<#-- @ftlvariable name="" type=" me.atam.planes4sale.api.SearchResultsView" -->
 <html lang="en">
 
 <head>

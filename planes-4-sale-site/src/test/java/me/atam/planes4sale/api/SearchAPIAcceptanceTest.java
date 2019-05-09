@@ -29,7 +29,7 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
     public void canSearchForBoeings() {
 
         Client client = ClientBuilder.newClient();
-        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/search").queryParam("manufacturer", "boeing");
+        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/public/search").queryParam("manufacturer", "boeing");
 
         Invocation.Builder invocationBuilder = searchTarget.request(MediaType.APPLICATION_JSON);
 
@@ -52,7 +52,7 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
     public void canSearchForAirbus() {
         //This test is not good enough for build time, but great for monitoring
         Client client = ClientBuilder.newClient();
-        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/search").queryParam("manufacturer", "airbus");
+        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/public/search").queryParam("manufacturer", "airbus");
 
         Invocation.Builder invocationBuilder = searchTarget.request(MediaType.APPLICATION_JSON);
 

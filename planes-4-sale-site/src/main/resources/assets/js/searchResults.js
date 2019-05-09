@@ -24,7 +24,7 @@ function SearchResultsViewModel() {
 
         $.ajax({
             type: 'POST',
-            url:  "/api/plane/" + self.currentSelectedPlane().id + "/contactseller",
+            url:  "/api/public/plane/" + self.currentSelectedPlane().id + "/contactseller",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             data: JSON.stringify(payload)
@@ -73,7 +73,7 @@ function SearchResultsViewModel() {
         return self.currentSelectedPlane();
     });
 
-    $.get( "/api/search?manufacturer=boeing", function( data ) {
+    $.get( "/api/public/search?manufacturer=boeing", function( data ) {
 
       self.planes(_.map(data, function(plane ){
         plane.imageURL="/plane-photos/" + plane.imageId + ".jpg";

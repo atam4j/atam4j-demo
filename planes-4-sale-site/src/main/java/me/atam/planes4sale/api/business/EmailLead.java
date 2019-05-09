@@ -1,7 +1,10 @@
 package me.atam.planes4sale.api.business;
 
+import java.util.UUID;
+
 public class EmailLead {
 
+    private String id = UUID.randomUUID().toString();
     private String buyerEmail;
     private String planeId;
     private String message;
@@ -28,5 +31,9 @@ public class EmailLead {
 
     public String getSellerEmail() {
         return sellerEmail;
+    }
+
+    public String getId() {
+        return id;
     }
 }

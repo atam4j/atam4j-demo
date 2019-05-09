@@ -8,15 +8,22 @@ import java.util.List;
 @Path("/business/email-leads")
 public class EmailLeadResource {
 
+    private JDBIEmailLeadsService emailLeadsService;
+
+    public EmailLeadResource(JDBIEmailLeadsService emailLeadsService) {
+        this.emailLeadsService = emailLeadsService;
+    }
 
     @GET
     public List<EmailLead> getAllEmailLeads(){
-        List result = new ArrayList<EmailLead>();
-        result.add(new EmailLead("buyer@buyer.com", "123", "hi", "seller@emails.com"));
-        result.add(new EmailLead("buyer@buyer.com", "444", "hi", "seller@emails.com"));
-        result.add(new EmailLead("buyer@buyer.com", "555", "hi", "seller@emails.com"));
-        result.add(new EmailLead("buyer@buyer.com", "777", "hi", "seller@emails.com"));
-        return result;
+        return this.emailLeadsService.getAllEmailLeads();
+//
+//        List result = new ArrayList<EmailLead>();
+//        result.add(new EmailLead("buyer@buyer.com", "123", "hi", "seller@emails.com"));
+//        result.add(new EmailLead("buyer@buyer.com", "444", "hi", "seller@emails.com"));
+//        result.add(new EmailLead("buyer@buyer.com", "555", "hi", "seller@emails.com"));
+//        result.add(new EmailLead("buyer@buyer.com", "777", "hi", "seller@emails.com"));
+//        return result;
     }
     //business/email-leads
 

@@ -11,6 +11,7 @@ import io.dropwizard.views.ViewBundle;
 import me.atam.planes4sale.api.ContactSellerResource;
 import me.atam.planes4sale.api.SearchResource;
 import me.atam.planes4sale.api.business.EmailLeadResource;
+import me.atam.planes4sale.api.business.JDBIEmailLeadsService;
 import org.jdbi.v3.core.Jdbi;
 
 import java.io.File;
@@ -33,11 +34,12 @@ public class Planes4SaleApplication extends Application<Planes4SaleConfiguration
         final JdbiFactory factory = new JdbiFactory();
         final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "database");
         final JDBIPlaneService planeService = jdbi.onDemand(JDBIPlaneService.class);
+        final JDBIEmailLeadsService emailLeadService = jdbi.onDemand(JDBIEmailLeadsService.class);
 
         environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(new SearchResource(planeService));
-        environment.jersey().register(new ContactSellerResource());
-        environment.jersey().register(new EmailLeadResource());
+        environment.jersey().register(new ContactSellerResource(emailLeadService));
+        environment.jersey().register(new EmailLeadResource(emailLeadService));
     }
 
     public void initialize(Bootstrap<Planes4SaleConfiguration> bootstrap) {

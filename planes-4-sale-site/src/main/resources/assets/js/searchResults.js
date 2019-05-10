@@ -76,7 +76,7 @@ function SearchResultsViewModel() {
     });
 
     //TODO make manufacuturer come from url param
-    $.get( "/api/public/search?manufacturer=boeing", function( data ) {
+    $.get( "/api/public/search" + window.location.search, function( data ) {
 
       self.planes(_.map(data, function(plane, counter ){
         plane.imageURL="/plane-photos/" + plane.imageId + ".jpg";

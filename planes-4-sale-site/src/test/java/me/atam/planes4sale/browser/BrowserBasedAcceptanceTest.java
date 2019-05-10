@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
+import java.util.NoSuchElementException;
 
 public class BrowserBasedAcceptanceTest extends AcceptanceTest {
 
@@ -46,6 +47,22 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--user-agent=ACCEPTANCE_TESTS_AS_MONITORS_BROWSER_CHROME");
         return chromeOptions;
+    }
+
+    protected void waitForElementToBeVisible(String element) throws InterruptedException {
+        for (int i = 0; i< 20; i++){
+            try{
+                driver.findElementById(element);
+                LOGGER.info("Found Element");
+                return ;
+            }
+            catch(Throwable noSuchElement){
+                LOGGER.info("Not found element, waiting for another attempt...");
+                //squash exception, wait a bit
+                Thread.sleep(100);
+            }
+        }
+
     }
 
     @After

@@ -1,5 +1,7 @@
 package me.atam.planes4sale;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class Plane {
@@ -10,6 +12,7 @@ public class Plane {
     private String id;
     private String manufacturer;
     private String model;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate manufactureDate;
     private String imageId;
     private String reg;

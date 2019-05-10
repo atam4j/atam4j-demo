@@ -21,7 +21,7 @@ public class SearchResource {
     }
 
     @GET
-    public List<Plane> getSearchResults(@QueryParam("manufacturer") String manufacturer){
+    public List<Plane> getSearchResults(@QueryParam("manufacturer") String manufacturer) throws InterruptedException {
         return planeService.findNameByManufacturer(manufacturer);
     }
 

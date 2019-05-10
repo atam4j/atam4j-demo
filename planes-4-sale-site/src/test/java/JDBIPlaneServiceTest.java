@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.List;
 
+import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_SELLER_EMAIL_ADDRESS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -26,7 +27,7 @@ public class JDBIPlaneServiceTest {
     @Before
     public void setup(){
         H2DatabasePlugin h2DatabasePlugin = new H2DatabasePlugin();
-        Jdbi jdbi = Jdbi.create(H2StubbedDatabase.DB_CONNECTION, "", "");
+        Jdbi jdbi = Jdbi.create(H2StubbedDatabase.DB_CONNECTION, H2StubbedDatabase.DB_USER, H2StubbedDatabase.DB_PASSWORD);
         jdbi.installPlugin(h2DatabasePlugin);
         jdbi.installPlugin(new SqlObjectPlugin());
         this.planeService = jdbi.onDemand(JDBIPlaneService.class);
@@ -42,6 +43,12 @@ public class JDBIPlaneServiceTest {
         assertThat(plane.getManufacturer(), is("Boeing"));
         assertThat(plane.getManufactureDate(), is(LocalDate.now()));
         assertThat(plane.getImageId(), is("1234.jpg"));
+    }
+
+    @Test
+    public void canRetrievePlaneSellersEmail() {
+        String planeSellersEmail = planeService.getPlaneSellersEmail(H2StubbedDatabase.KNOWN_PLANE_ID);
+        assertThat(planeSellersEmail, is(KNOWN_PLANE_SELLER_EMAIL_ADDRESS));
     }
 
     @Test

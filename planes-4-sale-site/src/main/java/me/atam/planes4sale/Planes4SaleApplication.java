@@ -35,11 +35,10 @@ public class Planes4SaleApplication extends Application<Planes4SaleConfiguration
 
         final JdbiFactory factory = new JdbiFactory();
         final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "database");
-        final JDBIPlaneService planeService = jdbi.onDemand(JDBIPlaneService.class);
         final JDBIEmailLeadsService emailLeadService = jdbi.onDemand(JDBIEmailLeadsService.class);
 
         environment.jersey().setUrlPattern("/api/*");
-        environment.jersey().register(new SearchResource(planeService));
+        environment.jersey().register(new SearchResource(jdbi.onDemand(JDBIPlaneService.class)));
         environment.jersey().register(new ContactSellerResource(emailLeadService, new EmailSendingService()));
         environment.jersey().register(new EmailLeadResource(emailLeadService));
     }

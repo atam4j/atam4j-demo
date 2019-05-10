@@ -3,7 +3,6 @@ package me.atam.planes4sale.api;
 import me.atam.planes4sale.api.business.EmailLead;
 import me.atam.planes4sale.api.business.JDBIEmailLeadsService;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -25,7 +24,6 @@ public class ContactSellerResource {
     @POST
     public Response contactSeller(@PathParam("planeId") String planeId, ContactSellerRequest request){
 
-        //TODO get seller mail
         EmailLead emailLead = request.toEmailLead(planeId, "sellerMail");
         emailSendingService.sendEmail(emailLead);
         emailLeadsService.addEmailLead(emailLead);

@@ -13,6 +13,8 @@ public interface JDBIPlaneService  {
     List<Plane> findNameByManufacturer(@Bind("manufacturer") String manufacturer);
 
 
+    @SqlQuery("select sellerEmail from planes where id = :id")
+    String getPlaneSellersEmail(@Bind("id") String planeId);
 }
 
 

@@ -6,11 +6,13 @@ public class EmailLead {
 
     private String id = UUID.randomUUID().toString();
     private String buyerEmail;
+    private String buyerNumber;
     private String planeId;
     private String message;
     private String sellerEmail;
 
-    public EmailLead(String buyerEmail, String planeId, String message, String sellerEmail) {
+    public EmailLead(String buyerNumber, String buyerEmail, String planeId, String message, String sellerEmail) {
+        this.buyerNumber = buyerNumber;
         this.buyerEmail = buyerEmail;
         this.planeId = planeId;
         this.message = message;
@@ -18,6 +20,14 @@ public class EmailLead {
     }
 
     public EmailLead() {
+    }
+
+    public String getBuyerNumber() {
+        return buyerNumber;
+    }
+
+    public void setBuyerNumber(String buyerNumber) {
+        this.buyerNumber = buyerNumber;
     }
 
     public void setId(String id) {

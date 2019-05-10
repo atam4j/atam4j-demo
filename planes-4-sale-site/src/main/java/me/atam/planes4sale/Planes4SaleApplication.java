@@ -38,8 +38,9 @@ public class Planes4SaleApplication extends Application<Planes4SaleConfiguration
         final JDBIEmailLeadsService emailLeadService = jdbi.onDemand(JDBIEmailLeadsService.class);
 
         environment.jersey().setUrlPattern("/api/*");
-        environment.jersey().register(new SearchResource(jdbi.onDemand(JDBIPlaneService.class)));
-        environment.jersey().register(new ContactSellerResource(emailLeadService, new EmailSendingService()));
+        JDBIPlaneService planeService = jdbi.onDemand(JDBIPlaneService.class);
+        environment.jersey().register(new SearchResource(planeService));
+        environment.jersey().register(new ContactSellerResource(emailLeadService, new EmailSendingService(), planeService));
         environment.jersey().register(new EmailLeadResource(emailLeadService));
     }
 

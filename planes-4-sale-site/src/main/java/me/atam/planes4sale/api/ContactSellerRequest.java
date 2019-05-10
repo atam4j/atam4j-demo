@@ -31,7 +31,7 @@ public class ContactSellerRequest {
     }
 
     public EmailLead toEmailLead(String planeId, String sellerEmail){
-        return new EmailLead(buyerEmail, planeId, buyerMessage, sellerEmail);
+        return new EmailLead(buyerNumber, buyerEmail, planeId, buyerMessage, sellerEmail);
     }
 
 

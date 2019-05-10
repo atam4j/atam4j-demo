@@ -13,7 +13,7 @@ public interface JDBIEmailLeadsService {
     @SqlQuery("select * from emailleads")
     List<EmailLead> getAllEmailLeads();
 
-    @SqlUpdate("insert into emailleads (id, buyerEmail , planeId , message, sellerEmail) values (:getId, :getBuyerEmail, :getPlaneId, :getMessage, :getSellerEmail )")
+    @SqlUpdate("insert into emailleads (id, buyerEmail, buyerNumber, planeId , message, sellerEmail) values (:getId, :getBuyerEmail, :getBuyerNumber, :getPlaneId, :getMessage, :getSellerEmail )")
     void addEmailLead(@BindMethods EmailLead emailLead);
 
 }

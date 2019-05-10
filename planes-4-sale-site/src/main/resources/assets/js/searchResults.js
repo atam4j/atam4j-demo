@@ -13,22 +13,24 @@ function SearchResultsViewModel() {
     self.contactSeller = function(){
 
         payload = {
-            planeId: self.currentSelectedPlane().id,
             buyerMessage :  self.contactSellerMessage(),
             buyerEmail :  self.contactSellerEmail(),
             buyerNumber :  self.contactSellerNumber()
         }
 
 
+        const idiot = $.ajax({
+                                type: 'POST',
+                                url:  "/api/public/plane/" + self.currentSelectedPlane().id + "/contactseller",
+                                contentType: 'application/json; charset=utf-8',
+                                dataType: 'json',
+                                data: JSON.stringify(payload)
+                            });
 
-
-        $.ajax({
-            type: 'POST',
-            url:  "/api/public/plane/" + self.currentSelectedPlane().id + "/contactseller",
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            data: JSON.stringify(payload)
-        }).done(function(){
+        idiot.fail(function(error){
+            console.log(error);
+        }
+        ).always(function(data){
             console.log("DONE");
 
             $('#contactSellerModal').modal('hide')

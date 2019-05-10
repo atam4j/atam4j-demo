@@ -20,8 +20,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactSellerAPIAcceptanceTest extends AcceptanceTest {
 
-
-
     @Test
     public void contactingSellerSendsAnEMail() {
 

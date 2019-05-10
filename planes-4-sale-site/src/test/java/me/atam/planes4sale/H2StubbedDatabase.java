@@ -12,6 +12,7 @@ public class H2StubbedDatabase {
     public static final String DB_USER = "planes";
     public static final String DB_PASSWORD = "password";
 
+    //todo - make known planes and write code to insert them - Will make tests easier to read!
     public static final String KNOWN_PLANE_ID = "bfe8a680";
     public static final String KNOWN_PLANE_SELLER_EMAIL_ADDRESS = "seller.of.plane.bfe8a680@email.com";
 
@@ -30,9 +31,9 @@ public class H2StubbedDatabase {
             }
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('bfe8a680', 'BOEING', '777-319/ER', DATE '2010-12-01', '1836933', 'ZK-OKM', 'seller.of.plane.bfe8a680@email.com'  )");
-                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('9fc2a9c9', 'BOEING', '777-31B/ER', DATE '2015-12-01', '2833243','B-2049' , 'seller.of.plane.9fc2a9c9@email.com'  )");
-                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('fa8983a3', 'AIRBUS', 'A340-541',   DATE '2003-12-01', '1360015', 'A6-ERD', 'seller.of.plane.fa8983a3@email.com'  )");
+                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('bfe8a680', 'Boeing', '777-319/ER', DATE '2010-12-01', '1836933', 'ZK-OKM', 'seller.of.plane.bfe8a680@email.com'  )");
+                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('9fc2a9c9', 'Boeing', '777-31B/ER', DATE '2015-12-01', '2833243','B-2049' , 'seller.of.plane.9fc2a9c9@email.com'  )");
+                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('fa8983a3', 'Airbus', 'A340-541',   DATE '2003-12-01', '1360015', 'A6-ERD', 'seller.of.plane.fa8983a3@email.com'  )");
 
             }
 

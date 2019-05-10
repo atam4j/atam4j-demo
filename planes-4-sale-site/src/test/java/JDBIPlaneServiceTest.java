@@ -33,16 +33,27 @@ public class JDBIPlaneServiceTest {
         this.planeService = jdbi.onDemand(JDBIPlaneService.class);
     }
 
+    @Test
+    public void canRetrievePlanes() {
+        List<Plane> list = planeService.findNameByManufacturer("Boeing");
+        assertThat(list.size(), is(2));
+        assertThat(list.get(0).getManufacturer(), is("Boeing"));
+        assertThat(list.get(1).getManufacturer(), is("Boeing"));
+    }
 
     @Test
-    public void canRetrieveBoeingPlanes() {
-        List<Plane> list = planeService.findNameByManufacturer("Boeing");
-        assertThat(list.size(), is(1));
-        Plane plane = list.get(0);
-        assertThat(plane.getId(), is("123"));
-        assertThat(plane.getManufacturer(), is("Boeing"));
-        assertThat(plane.getManufactureDate(), is(LocalDate.now()));
-        assertThat(plane.getImageId(), is("1234.jpg"));
+    public void canRetrieveBoeingPlanesCaseInsensitive() {
+        List<Plane> list = planeService.findNameByManufacturer("BoEinG");
+        assertThat(list.size(), is(2));
+        assertThat(list.get(0).getManufacturer(), is("Boeing"));
+        assertThat(list.get(1).getManufacturer(), is("Boeing"));
+
+    }
+
+    @Test
+    public void returnsZeroRowsWhenNone() {
+        List<Plane> planes = planeService.findNameByManufacturer("unknown");
+        assertThat(planes.size(), is(0));
     }
 
     @Test
@@ -50,31 +61,6 @@ public class JDBIPlaneServiceTest {
         String planeSellersEmail = planeService.getPlaneSellersEmail(H2StubbedDatabase.KNOWN_PLANE_ID);
         assertThat(planeSellersEmail, is(KNOWN_PLANE_SELLER_EMAIL_ADDRESS));
     }
-
-    @Test
-    public void canRetrieveBoeingPlanesCaseInsensitive() {
-
-
-
-        List<Plane> list = planeService.findNameByManufacturer("BoEinG");
-        assertThat(list.size(), is(1));
-        Plane plane = list.get(0);
-        assertThat(plane.getId(), is("123"));
-        assertThat(plane.getManufacturer(), is("Boeing"));
-        assertThat(plane.getManufactureDate(), is(LocalDate.now()));
-        assertThat(plane.getImageId(), is("1234.jpg"));
-    }
-
-    @Test
-    public void returnseroRowsWhenNone() {
-        List<Plane> planes = planeService.findNameByManufacturer("unknown");
-        assertThat(planes.size(), is(0));
-    }
-
-
-
-
-
 
 }
 

@@ -19,7 +19,7 @@ function SearchResultsViewModel() {
         }
 
 
-        const idiot = $.ajax({
+        const ajaxRequest = $.ajax({
                                 type: 'POST',
                                 url:  "/api/public/plane/" + self.currentSelectedPlane().id + "/contactseller",
                                 contentType: 'application/json; charset=utf-8',
@@ -27,7 +27,7 @@ function SearchResultsViewModel() {
                                 data: JSON.stringify(payload)
                             });
 
-        idiot.fail(function(error){
+        ajaxRequest.fail(function(error){
             console.log(error);
         }
         ).always(function(data){
@@ -35,17 +35,6 @@ function SearchResultsViewModel() {
 
             $('#contactSellerModal').modal('hide')
         });
-
-
-
-
-
-            /*
-            $.post('http://example.com/form.php', {category:'client', type:'premium'}, function(response){
-                  alert("success");
-                  $("#mypar").html(response.amount);
-            });
-            */
 
     }
 

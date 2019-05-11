@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import java.util.*;
 
 import static javax.ws.rs.client.Entity.*;
-import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_ID;
+import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_1;
 import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_SELLER_EMAIL_ADDRESS;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -27,7 +27,7 @@ public class ContactSellerAPIAcceptanceTest extends AcceptanceTest {
         String message = "Here is my messaue!" + uuidForEmail;
 
         Client client = ClientBuilder.newClient();
-        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/public/plane/" + KNOWN_PLANE_ID + "/contactseller");
+        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/public/plane/" + KNOWN_PLANE_1.getId() + "/contactseller");
 
         Invocation.Builder invocationBuilder = searchTarget.request(MediaType.APPLICATION_JSON);
 
@@ -57,7 +57,7 @@ public class ContactSellerAPIAcceptanceTest extends AcceptanceTest {
                 .findFirst();
 
         assertThat(email.isPresent(), is(true));
-        assertThat(email.get().get("planeId"), is(KNOWN_PLANE_ID));
+        assertThat(email.get().get("planeId"), is(KNOWN_PLANE_1.getId()));
         assertThat(email.get().get("message"), is(message));
         assertThat(email.get().get("sellerEmail"), is(KNOWN_PLANE_SELLER_EMAIL_ADDRESS));
         assertThat(email.get().get("buyerEmail"), is("buyer@buyer.com"));

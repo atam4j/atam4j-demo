@@ -14,8 +14,6 @@ public class H2StubbedDatabase {
     public static final String DB_USER = "planes";
     public static final String DB_PASSWORD = "password";
 
-    //todo - make known planes and write code to insert them - Will make tests easier to read!
-    public static final String KNOWN_PLANE_ID = "bfe8a680";
     public static final String KNOWN_PLANE_SELLER_EMAIL_ADDRESS = "seller.of.plane.bfe8a680@email.com";
     
     public static final Plane KNOWN_PLANE_1 = new Plane("bfe8a680", "Boeing", "777-319/ER", LocalDate.of(2010, 12, 1), "1836933", "ZK-OKM" );

@@ -58,7 +58,7 @@ public class JDBIPlaneServiceTest {
 
     @Test
     public void canRetrievePlaneSellersEmail() {
-        String planeSellersEmail = planeService.getPlaneSellersEmail(H2StubbedDatabase.KNOWN_PLANE_ID);
+        String planeSellersEmail = planeService.getPlaneSellersEmail(H2StubbedDatabase.KNOWN_PLANE_1.getId());
         assertThat(planeSellersEmail, is(KNOWN_PLANE_SELLER_EMAIL_ADDRESS));
     }
 

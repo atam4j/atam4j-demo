@@ -26,28 +26,7 @@
         <module>acceptance-tests-as-monitors</module>
     </modules>
 
-    <dependencyManagement>
-        <dependencies>
 
-
-
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-all</artifactId>
-                <scope>test</scope>
-                <version>${hamcrest.version}</version>
-            </dependency>
-
-
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>

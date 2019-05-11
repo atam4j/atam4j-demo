@@ -1,5 +1,35 @@
 version: '2'
 services:
+  selenium-hub:
+    image: selenium/hub:3.141.59-bismuth
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+  chrome:
+      image: selenium/node-chrome:3.141.59-bismuth
+      depends_on:
+        - selenium-hub
+        - planes-4-sale-site
+      environment:
+        - HUB_HOST=selenium-hub
+        - HUB_PORT=4444
+  planes-4-sale-site:
+      build: planes-4-sale-site/.
+      depends_on:
+        - db
+      ports:
+        - "8080:8080"
+        - "8081:8081"
+  planes-4-sale-accepance-test-monitors:
+      build: acceptance-tests-as-monitors/.
+      depends_on:
+        - selenium-hub
+        - planes-4-sale-site
+      volumes:
+        - /dev/shm:/dev/shm
+      ports:
+        - "9090:9090"
+        - "9091:9091"
   db:
     image: mysql:8.0.16
     command: --default-authentication-plugin=mysql_native_password

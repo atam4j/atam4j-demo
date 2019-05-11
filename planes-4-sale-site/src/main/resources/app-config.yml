@@ -32,7 +32,7 @@ database:
   password: password
 
   # the JDBC URL
-  url: jdbc:mysql://localhost:3306/planes
+  url: jdbc:mysql://db:3306/planes
 
   # any properties specific to your JDBC driver:
   properties:

@@ -12,14 +12,16 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
-import java.util.NoSuchElementException;
 
 public class BrowserBasedAcceptanceTest extends AcceptanceTest {
 
 
+    private static final int ATTEMPTS_TO_RETRY_FINDING_ELEMENT = 30;
+    private  static final int DELAY_BEFORE_RETRY_FINDING_ELEMENT = 200;
     private static Logger LOGGER = LoggerFactory.getLogger(BrowserBasedAcceptanceTest.class);
-    protected RemoteWebDriver driver;
-    protected DriverService service;
+
+    RemoteWebDriver driver;
+    private DriverService service;
 
 
 
@@ -49,8 +51,8 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
         return chromeOptions;
     }
 
-    protected void waitForElementToBeVisible(String element) throws InterruptedException {
-        for (int i = 0; i< 20; i++){
+    void waitForElementToBeVisible(String element) throws InterruptedException {
+        for (int i = 0; i< ATTEMPTS_TO_RETRY_FINDING_ELEMENT; i++){
             try{
                 driver.findElementById(element);
                 LOGGER.info("Found Element");
@@ -58,8 +60,8 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
             }
             catch(Throwable noSuchElement){
                 LOGGER.info("Not found element, waiting for another attempt...");
-                //squash exception, wait a bit
-                Thread.sleep(100);
+                //squash exception, wait a bit, retry...
+                Thread.sleep(DELAY_BEFORE_RETRY_FINDING_ELEMENT);
             }
         }
 

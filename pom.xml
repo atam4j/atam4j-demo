@@ -19,6 +19,8 @@
         <target-jdk>1.8</target-jdk>
         <hamcrest.version>1.3</hamcrest.version>
         <atam4j.version>0.60</atam4j.version>
+        <selenium.version>3.141.59</selenium.version>
+        <dw.version>1.3.9</dw.version>
     </properties>
 
     <modules>

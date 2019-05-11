@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class H2StubbedDatabase {
 
@@ -15,7 +17,20 @@ public class H2StubbedDatabase {
     //todo - make known planes and write code to insert them - Will make tests easier to read!
     public static final String KNOWN_PLANE_ID = "bfe8a680";
     public static final String KNOWN_PLANE_SELLER_EMAIL_ADDRESS = "seller.of.plane.bfe8a680@email.com";
+    
+    public static final Plane KNOWN_PLANE_1 = new Plane("bfe8a680", "Boeing", "777-319/ER", LocalDate.of(2010, 12, 1), "1836933", "ZK-OKM" );
+    public static final Plane KNOWN_PLANE_2= new Plane("9fc2a9c9", "Boeing", "777-31B/ER", LocalDate.of( 2015, 12, 1), "2833243","B-2049" );
+    public static final Plane KNOWN_PLANE_3 = new Plane("fa8983a3", "Airbus", "A340-541",   LocalDate.of( 2003, 12,1), "1360015", "A6-ERD" );
 
+
+    public static void main(String[] args) {
+        String s = "INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('bfe8a680', 'Boeing', '777-319/ER', DATE '2010-12-01', '1836933', 'ZK-OKM', 'seller.of.plane.bfe8a680@email.com'";
+        System.out.println(s);
+
+        String b = String.format ("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('%s', '%s', '%s', DATE '%s', '%s', '%s', 'seller.of.plane.%s@email.com'", KNOWN_PLANE_1.getId(), KNOWN_PLANE_1.getManufacturer(), KNOWN_PLANE_1.getModel(), KNOWN_PLANE_1.getManufactureDate().format(DateTimeFormatter.ISO_DATE), KNOWN_PLANE_1.getImageId(), KNOWN_PLANE_1.getReg(), KNOWN_PLANE_1.getId());
+        System.out.println(b);
+
+    }
 
 
     public static void resetAndRecreatePlanesDatabase() {
@@ -31,9 +46,11 @@ public class H2StubbedDatabase {
             }
 
             try(Statement statement = connection.createStatement()){
-                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('bfe8a680', 'Boeing', '777-319/ER', DATE '2010-12-01', '1836933', 'ZK-OKM', 'seller.of.plane.bfe8a680@email.com'  )");
-                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('9fc2a9c9', 'Boeing', '777-31B/ER', DATE '2015-12-01', '2833243','B-2049' , 'seller.of.plane.9fc2a9c9@email.com'  )");
-                statement.execute("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('fa8983a3', 'Airbus', 'A340-541',   DATE '2003-12-01', '1360015', 'A6-ERD', 'seller.of.plane.fa8983a3@email.com'  )");
+
+
+                statement.execute(getInsertStatementForPlane(KNOWN_PLANE_1));
+                statement.execute(getInsertStatementForPlane(KNOWN_PLANE_2));
+                statement.execute(getInsertStatementForPlane(KNOWN_PLANE_3));
 
             }
 
@@ -42,6 +59,10 @@ public class H2StubbedDatabase {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    protected static String getInsertStatementForPlane(Plane plane) {
+        return String.format ("INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('%s', '%s', '%s', DATE '%s', '%s', '%s', 'seller.of.plane.%s@email.com')", plane.getId(), plane.getManufacturer(), plane.getModel(), plane.getManufactureDate().format(DateTimeFormatter.ISO_DATE), plane.getImageId(), plane.getReg(), plane.getId());
     }
 
     private static Connection getDBConnection() {

@@ -66,6 +66,7 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
             }
             catch(Throwable noSuchElement){
                 LOGGER.info("Not found element with id " + elementId + ", waiting for another attempt...");
+
                 //squash exception, wait a bit, retry...
                 try {
                     Thread.sleep(DELAY_BEFORE_RETRY_FINDING_ELEMENT);
@@ -74,6 +75,8 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
                 }
             }
         }
+        throw new RuntimeException("Could not find element with id: " + elementId + " on page: " + driver.getCurrentUrl() + " after " + ATTEMPTS_TO_RETRY_FINDING_ELEMENT + " attempts");
+
 
     }
 

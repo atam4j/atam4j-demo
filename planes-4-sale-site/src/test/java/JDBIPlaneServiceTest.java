@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_1;
-import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_SELLER_EMAIL_ADDRESS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 

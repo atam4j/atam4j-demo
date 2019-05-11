@@ -14,8 +14,6 @@ public class H2StubbedDatabase {
     public static final String DB_USER = "planes";
     public static final String DB_PASSWORD = "password";
 
-    public static final String KNOWN_PLANE_SELLER_EMAIL_ADDRESS = "seller.of.plane.bfe8a680@email.com";
-    
     public static final Plane KNOWN_PLANE_1 = new Plane("bfe8a680", "Boeing", "777-319/ER", LocalDate.of(2010, 12, 1), "1836933", "ZK-OKM", "seller.of.plane.bfe8a680@fake.email.com" );
     public static final Plane KNOWN_PLANE_2= new Plane("9fc2a9c9", "Boeing", "777-31B/ER", LocalDate.of( 2015, 12, 1), "2833243","B-2049" , "seller.of.plane.9fc2a9c9@fake.email.com");
     public static final Plane KNOWN_PLANE_3 = new Plane("fa8983a3", "Airbus", "A340-541",   LocalDate.of( 2003, 12,1), "1360015", "A6-ERD", "seller.of.plane.fa8983a3@fake.email.com" );

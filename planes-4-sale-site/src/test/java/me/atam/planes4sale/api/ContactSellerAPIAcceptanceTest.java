@@ -1,21 +1,22 @@
 package me.atam.planes4sale.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import me.atam.planes4sale.AcceptanceTest;
-import me.atam.planes4sale.H2StubbedDatabase;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
-import javax.ws.rs.client.*;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
-import java.util.*;
-
-import static javax.ws.rs.client.Entity.*;
+import static javax.ws.rs.client.Entity.entity;
 import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_1;
-import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_SELLER_EMAIL_ADDRESS;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactSellerAPIAcceptanceTest extends AcceptanceTest {

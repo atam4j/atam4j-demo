@@ -34,7 +34,7 @@ public class SearchResultsPage {
 
 
         public boolean isDisplayed() {
-            return driver.findElementById("plane-1").isDisplayed();
+            return driver.findElementById(planeId).isDisplayed();
         }
 
 

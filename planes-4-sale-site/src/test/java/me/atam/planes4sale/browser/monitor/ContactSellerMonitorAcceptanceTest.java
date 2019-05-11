@@ -1,6 +1,7 @@
-package me.atam.planes4sale.browser;
+package me.atam.planes4sale.browser.monitor;
 
 import me.atam.planes4sale.BrowserBasedAcceptanceTest;
+import me.atam.planes4sale.browser.SearchResultsPage;
 import me.atam.planes4sale.browser.SearchResultsPage.PlaneView;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -18,46 +19,23 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_AIRBUS;
-import static me.atam.planes4sale.browser.SearchResultsPage.*;
+import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_HIDDEN_PLANE;
+import static me.atam.planes4sale.browser.SearchResultsPage.ContactSellerPopup;
+import static me.atam.planes4sale.browser.SearchResultsPage.load;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactSellerAcceptanceTest extends BrowserBasedAcceptanceTest {
-
-    @Test
-    public void popupLoadsAndCloses() {
-        SearchResultsPage searchResultsPage = load(getHostAndPort(), "airbus", driver);
-        PlaneView planeView = searchResultsPage.getPlaneView("plane-0");
-        ContactSellerPopup contactSellerPopup = planeView.loadContactSellerPopup();
-
-        WebElement messageTextBox = contactSellerPopup.getMessageTextBox();
-        assertThat(messageTextBox.getAttribute("value"), is("Hi, I like the look of your plane.  Can we talk?"));
-
-        WebElement emailAddressTextBox = contactSellerPopup.getEmailAddressTextBox();
-        assertThat(emailAddressTextBox.getAttribute("value"), is("youremail@address.com"));
-
-        WebElement phoneNumberTextBox = contactSellerPopup.getPhoneNumberTextBox();
-        assertThat(phoneNumberTextBox.getAttribute("value"), is(""));
-
-        contactSellerPopup.close();
-
-        //checkpopup has gone
-        assertThat(messageTextBox.isDisplayed(), is(false));
-        assertThat(emailAddressTextBox.isDisplayed(), is(false));
-        assertThat(phoneNumberTextBox.isDisplayed(), is(false));
-    }
-
+public class ContactSellerMonitorAcceptanceTest extends BrowserBasedAcceptanceTest {
 
 
     @Test
-    //TODO - is this test needed?
     public void canContactSellerAndEmailLeadAvailable() {
         String uuid = UUID.randomUUID().toString();
         String message = " This message has a UUID: " + uuid;
         String buyerEmailAddress = "phill.barber@buyer.com";
         String buyerPhoneNumber = "01717171717";
 
-        SearchResultsPage searchResultsPage = load(getHostAndPort(), "airbus", driver);
+        SearchResultsPage searchResultsPage = load(getHostAndPort(), KNOWN_HIDDEN_PLANE.getManufacturer(), driver);
         PlaneView planeView = searchResultsPage.getPlaneView("plane-0");
         ContactSellerPopup contactSellerPopup = planeView.loadContactSellerPopup();
 
@@ -93,9 +71,9 @@ public class ContactSellerAcceptanceTest extends BrowserBasedAcceptanceTest {
                 .findFirst();
 
         assertThat(email.isPresent(), is(true));
-        assertThat(email.get().get("planeId"), is(KNOWN_AIRBUS.getId()));
+        assertThat(email.get().get("planeId"), is(KNOWN_HIDDEN_PLANE.getId()));
         assertThat(email.get().get("message"), is(message));
-        assertThat(email.get().get("sellerEmail"), is(KNOWN_AIRBUS.getSellerEmail()));
+        assertThat(email.get().get("sellerEmail"), is(KNOWN_HIDDEN_PLANE.getSellerEmail()));
         assertThat(email.get().get("buyerEmail"), is(buyerEmailAddress));
         assertThat(email.get().get("buyerNumber"), is(buyerPhoneNumber));
     }

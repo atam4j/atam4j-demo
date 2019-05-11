@@ -18,6 +18,8 @@ public class H2StubbedDatabase {
     public static final Plane KNOWN_BOEING_2 = new Plane("9fc2a9c9", "Boeing", "777-31B/ER", LocalDate.of( 2015, 12, 1), "2833243","B-2049" , "seller.of.plane.9fc2a9c9@fake.email.com");
     public static final Plane KNOWN_AIRBUS = new Plane("fa8983a3", "Airbus", "A340-541",   LocalDate.of( 2003, 12,1), "1360015", "A6-ERD", "seller.of.plane.fa8983a3@fake.email.com" );
 
+    public static final Plane KNOWN_HIDDEN_PLANE = new Plane("c3231beb", "fae3f586183b", "A340-541",   LocalDate.of( 2003, 12,1), "1360015", "A6-ERD", "seller.of.plane.c3231beb@fake.email.com" );
+
 
 
     public static void resetAndRecreatePlanesDatabase() {
@@ -34,10 +36,11 @@ public class H2StubbedDatabase {
 
             try(Statement statement = connection.createStatement()){
 
-
                 statement.execute(getInsertStatementForPlane(KNOWN_BOEING_1));
                 statement.execute(getInsertStatementForPlane(KNOWN_BOEING_2));
                 statement.execute(getInsertStatementForPlane(KNOWN_AIRBUS));
+                statement.execute(getInsertStatementForPlane(KNOWN_HIDDEN_PLANE));
+
 
             }
 

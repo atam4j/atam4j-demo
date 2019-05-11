@@ -2,6 +2,7 @@ package me.atam.planes4sale.browser;
 
 import me.atam.atam4j.Monitor;
 import me.atam.planes4sale.BrowserBasedAcceptanceTest;
+import me.atam.planes4sale.HomePage;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -14,15 +15,13 @@ public class HomepageAcceptanceTest extends BrowserBasedAcceptanceTest {
     @Test
     public void homepageLoadsAndHasButtons() {
         //this has EVENT issues
-        driver.get(getHostAndPort());
+        HomePage homePage = HomePage.load(driver, getHostAndPort());
 
-        waitForElementToBeVisible("boeingSearchButton");
-
-        assertThat(driver.getTitle(), CoreMatchers.is("Planes 4 Sale"));
-        WebElement boeingSearchButton = driver.findElementById("boeingSearchButton");
+        assertThat(homePage.getTitle(), CoreMatchers.is("Planes 4 Sale"));
+        WebElement boeingSearchButton = homePage.getBoeingSearchButton();
         assertThat(boeingSearchButton.getText(), CoreMatchers.is("Search For Boeing Planes"));
 
-        WebElement airbusSearchButton = driver.findElementById("airbusSearchButton");
+        WebElement airbusSearchButton = homePage.getAirbusSearchButton();
         assertThat(airbusSearchButton.getText(), CoreMatchers.is("Search For Airbus Planes"));
     }
 }

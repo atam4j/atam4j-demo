@@ -29,6 +29,8 @@ public abstract class AcceptanceTest {
         return getConfig().getSiteAddress();
     }
 
+
+
     @Before
     public void setUp() throws Exception{
         LOGGER.info("Setup with config: " + getConfig());

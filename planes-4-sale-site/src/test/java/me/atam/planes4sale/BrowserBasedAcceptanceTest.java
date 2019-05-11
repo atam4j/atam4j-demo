@@ -2,6 +2,7 @@ package me.atam.planes4sale;
 
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -21,6 +22,7 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
 
     protected RemoteWebDriver driver;
     private DriverService service;
+
 
 
 
@@ -50,7 +52,12 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
         return chromeOptions;
     }
 
-    protected void waitForElementToBeVisible(String elementId)  {
+    public void waitForElementToBeVisible( String elementId)  {
+        waitForElementToBeVisible(driver, elementId);
+    }
+
+
+    public static void waitForElementToBeVisible(RemoteWebDriver driver, String elementId)  {
         for (int i = 0; i< ATTEMPTS_TO_RETRY_FINDING_ELEMENT; i++){
             try{
                 driver.findElementById(elementId);

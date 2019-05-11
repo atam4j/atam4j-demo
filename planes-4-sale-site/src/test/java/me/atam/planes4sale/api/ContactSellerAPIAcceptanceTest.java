@@ -19,7 +19,7 @@ public class ContactSellerAPIAcceptanceTest extends AcceptanceTest {
     APIClient apiClient = new APIClient(getHostAndPort());
 
     @Test
-    public void contactingSellerSendsAnEMail() {
+    public void contactingSellerSendsAnEmail() {
 
         String uuidForEmail = UUID.randomUUID().toString();
         String message = "Here is my messaue!" + uuidForEmail;

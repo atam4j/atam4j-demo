@@ -13,7 +13,6 @@ import static javax.ws.rs.client.Entity.entity;
 
 public class APIClient {
 
-
     private String hostAndPort;
     Client client = ClientBuilder.newClient();
 

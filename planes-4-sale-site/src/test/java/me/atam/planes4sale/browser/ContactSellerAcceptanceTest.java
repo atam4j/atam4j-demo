@@ -97,6 +97,5 @@ public class ContactSellerAcceptanceTest extends BrowserBasedAcceptanceTest {
         assertThat(email.get().get("sellerEmail"), is(KNOWN_AIRBUS.getSellerEmail()));
         assertThat(email.get().get("buyerEmail"), is(buyerEmailAddress));
         assertThat(email.get().get("buyerNumber"), is(buyerPhoneNumber));
-
     }
 }

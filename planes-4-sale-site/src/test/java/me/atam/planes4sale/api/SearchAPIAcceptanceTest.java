@@ -1,24 +1,16 @@
 package me.atam.planes4sale.api;
 
-import me.atam.atam4j.Monitor;
 import me.atam.planes4sale.APIClient;
 import me.atam.planes4sale.AcceptanceTest;
 import org.junit.Test;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasSize;
 
 public class SearchAPIAcceptanceTest extends AcceptanceTest {
 
@@ -70,7 +62,6 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
         checkHasAttributeWithSNonNulltringValue(plane, "imageId");
         checkHasAttributeWithSNonNulltringValue(plane, "reg");
     }
-
 
 
     private void checkHasAttributeWithSNonNulltringValue(Map<String, Object> plane, String attribute) {

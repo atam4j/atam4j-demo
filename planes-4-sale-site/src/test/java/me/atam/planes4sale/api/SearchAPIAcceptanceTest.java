@@ -25,6 +25,7 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
         assertThat(apiResponse.getStatus(), is(200));
         List<Map<String,Object>> planes = apiResponse.readEntity(List.class);
         assertThat(planes.size(), is(2));
+        //returned in exact order - newest planes first!
         checkPlaneMatchesExpectedPlane(KNOWN_BOEING_2, planes.get(0));
         checkPlaneMatchesExpectedPlane(KNOWN_BOEING_1, planes.get(1));
 
@@ -53,11 +54,7 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
     }
 
 
-    private void checkHasAttributeWithSNonNulltringValue(Map<String, Object> plane, String attribute) {
-        assertThat(plane.get(attribute), is(notNullValue()));
-        assertThat(plane.get(attribute), instanceOf(String.class));
-        assertThat(((String) plane.get(attribute)).length(), greaterThan(1 ));
-    }
+
 
     private void checkPlaneMatchesExpectedPlane(Plane expectedPlane, Map<String, Object> plane) {
         assertThat(plane.get("manufacturer"), is(expectedPlane.getManufacturer()));

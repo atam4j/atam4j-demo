@@ -15,7 +15,7 @@ public class H2StubbedDatabase {
     public static final String DB_PASSWORD = "password";
 
     public static final Plane KNOWN_BOEING_1 = new Plane("bfe8a680", "Boeing", "777-319/ER", LocalDate.of(2010, 12, 1), "1836933", "ZK-OKM", "seller.of.plane.bfe8a680@fake.email.com" );
-    public static final Plane KNWON_BOEING_2 = new Plane("9fc2a9c9", "Boeing", "777-31B/ER", LocalDate.of( 2015, 12, 1), "2833243","B-2049" , "seller.of.plane.9fc2a9c9@fake.email.com");
+    public static final Plane KNOWN_BOEING_2 = new Plane("9fc2a9c9", "Boeing", "777-31B/ER", LocalDate.of( 2015, 12, 1), "2833243","B-2049" , "seller.of.plane.9fc2a9c9@fake.email.com");
     public static final Plane KNOWN_AIRBUS = new Plane("fa8983a3", "Airbus", "A340-541",   LocalDate.of( 2003, 12,1), "1360015", "A6-ERD", "seller.of.plane.fa8983a3@fake.email.com" );
 
 
@@ -36,7 +36,7 @@ public class H2StubbedDatabase {
 
 
                 statement.execute(getInsertStatementForPlane(KNOWN_BOEING_1));
-                statement.execute(getInsertStatementForPlane(KNWON_BOEING_2));
+                statement.execute(getInsertStatementForPlane(KNOWN_BOEING_2));
                 statement.execute(getInsertStatementForPlane(KNOWN_AIRBUS));
 
             }

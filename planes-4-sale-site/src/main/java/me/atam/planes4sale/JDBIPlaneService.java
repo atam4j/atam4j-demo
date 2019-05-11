@@ -9,7 +9,7 @@ import java.util.List;
 public interface JDBIPlaneService  {
 
     @RegisterBeanMapper(Plane.class)
-    @SqlQuery("select * from planes where lower(manufacturer) = lower(:manufacturer)")
+    @SqlQuery("select * from planes where lower(manufacturer) = lower(:manufacturer) order by manufactureDate desc")
     List<Plane> findNameByManufacturer(@Bind("manufacturer") String manufacturer);
 
 

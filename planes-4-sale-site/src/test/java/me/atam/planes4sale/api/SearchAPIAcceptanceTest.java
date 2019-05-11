@@ -49,6 +49,24 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
+    public void searchDoesNotExposeSellerEmailAddress() {
+
+        Client client = ClientBuilder.newClient();
+        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/public/search").queryParam("manufacturer", "boeing");
+
+        Invocation.Builder invocationBuilder = searchTarget.request(MediaType.APPLICATION_JSON);
+
+        Response apiResponse = invocationBuilder.get();
+        assertThat(apiResponse.getStatus(), is(200));
+
+        List<Map<String,Object>> planes = apiResponse.readEntity(List.class);
+        assertThat(planes.size(), is(greaterThan(0)));
+
+        Map<String,Object> plane = planes.get(0);
+        assertThat(plane.containsKey("sellerEmail"), is(false));
+    }
+
+    @Test
     public void canSearchForAirbus() {
         //This test is not good enough for build time, but great for monitoring
         Client client = ClientBuilder.newClient();

@@ -1,6 +1,7 @@
 package me.atam.planes4sale.api;
 
 import me.atam.atam4j.Monitor;
+import me.atam.planes4sale.APIClient;
 import me.atam.planes4sale.AcceptanceTest;
 import org.junit.Test;
 
@@ -19,20 +20,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 
-@Monitor
 public class SearchAPIAcceptanceTest extends AcceptanceTest {
+
+    private APIClient apiClient = new APIClient(getHostAndPort());
+
     //This test is not good enough for build time, but great for monitoring
     @Test
     public void canSearchForBoeings() {
 
-        Client client = ClientBuilder.newClient();
-        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/public/search").queryParam("manufacturer", "boeing");
+        Response apiResponse = apiClient.getSearchResultsFor("boeing");
 
-        Invocation.Builder invocationBuilder = searchTarget.request(MediaType.APPLICATION_JSON);
-
-        Response apiResponse = invocationBuilder.get();
         assertThat(apiResponse.getStatus(), is(200));
-
         List<Map<String,Object>> planes = apiResponse.readEntity(List.class);
         assertThat(planes.size(), is(greaterThan(0)));
 
@@ -47,13 +45,7 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void searchDoesNotExposeSellerEmailAddress() {
-
-        Client client = ClientBuilder.newClient();
-        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/public/search").queryParam("manufacturer", "boeing");
-
-        Invocation.Builder invocationBuilder = searchTarget.request(MediaType.APPLICATION_JSON);
-
-        Response apiResponse = invocationBuilder.get();
+        Response apiResponse = apiClient.getSearchResultsFor("boeing");
         assertThat(apiResponse.getStatus(), is(200));
 
         List<Map<String,Object>> planes = apiResponse.readEntity(List.class);
@@ -65,18 +57,11 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void canSearchForAirbus() {
-        //This test is not good enough for build time, but great for monitoring
-        Client client = ClientBuilder.newClient();
-        WebTarget searchTarget = client.target(getHostAndPort() ).path("/api/public/search").queryParam("manufacturer", "airbus");
-
-        Invocation.Builder invocationBuilder = searchTarget.request(MediaType.APPLICATION_JSON);
-
-        Response apiResponse = invocationBuilder.get();
+        Response apiResponse = apiClient.getSearchResultsFor("airbus");
         assertThat(apiResponse.getStatus(), is(200));
 
         List<Map<String,Object>> planes = apiResponse.readEntity(List.class);
         assertThat(planes.size(), is(greaterThan(0)));
-
         Map<String,Object> plane = planes.get(0);
 
         assertThat(plane.get("manufacturer"), is("Airbus"));
@@ -84,7 +69,6 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
         checkHasAttributeWithSNonNulltringValue(plane, "manufacturer");
         checkHasAttributeWithSNonNulltringValue(plane, "imageId");
         checkHasAttributeWithSNonNulltringValue(plane, "reg");
-
     }
 
 

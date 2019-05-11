@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.greaterThan;
 /*
     Relies on at least one Boeing and one Airbus
  */
-public class SearchAPIMonitoringAcceptanceTest extends AcceptanceTest {
+public class SearchAPIMonitorAcceptanceTest extends AcceptanceTest {
 
     private APIClient apiClient = new APIClient(getHostAndPort());
 

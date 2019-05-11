@@ -1,6 +1,5 @@
-package me.atam.planes4sale.browser;
+package me.atam.planes4sale;
 
-import me.atam.planes4sale.AcceptanceTest;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -20,7 +19,7 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
     private  static final int DELAY_BEFORE_RETRY_FINDING_ELEMENT = 200;
     private static Logger LOGGER = LoggerFactory.getLogger(BrowserBasedAcceptanceTest.class);
 
-    RemoteWebDriver driver;
+    protected RemoteWebDriver driver;
     private DriverService service;
 
 
@@ -51,17 +50,21 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
         return chromeOptions;
     }
 
-    void waitForElementToBeVisible(String element) throws InterruptedException {
+    protected void waitForElementToBeVisible(String elementId)  {
         for (int i = 0; i< ATTEMPTS_TO_RETRY_FINDING_ELEMENT; i++){
             try{
-                driver.findElementById(element);
+                driver.findElementById(elementId);
                 LOGGER.info("Found Element");
                 return ;
             }
             catch(Throwable noSuchElement){
-                LOGGER.info("Not found element, waiting for another attempt...");
+                LOGGER.info("Not found element with id " + elementId + ", waiting for another attempt...");
                 //squash exception, wait a bit, retry...
-                Thread.sleep(DELAY_BEFORE_RETRY_FINDING_ELEMENT);
+                try {
+                    Thread.sleep(DELAY_BEFORE_RETRY_FINDING_ELEMENT);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
 

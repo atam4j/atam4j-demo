@@ -2,10 +2,7 @@ package me.atam.planes4sale.api;
 
 import me.atam.atam4j.Monitor;
 import me.atam.planes4sale.AcceptanceTest;
-import me.atam.planes4sale.browser.BrowserBasedAcceptanceTest;
-import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

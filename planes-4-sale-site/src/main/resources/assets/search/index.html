@@ -74,19 +74,19 @@
                         <form>
 
                             <p>Message</p>
-                            <textarea rows="4" cols="50" data-bind="value: $parent.contactSellerMessage"></textarea>
+                            <textarea id="message" rows="4" cols="50" data-bind="value: $parent.contactSellerMessage"></textarea>
 
                             <p>Email Address</p>
-                            <input type="text" name="emailAddress" data-bind="value: $parent.contactSellerEmail" value=""/>
+                            <input id="emailAddress" type="text" name="emailAddress" data-bind="value: $parent.contactSellerEmail" value=""/>
 
                             <p>Phone Number</p>
-                            <input type="text" name="phoneNumber" data-bind="value: $parent.contactSellerNumber" value=""/>
+                            <input id="phoneNumber" type="text" name="phoneNumber" data-bind="value: $parent.contactSellerNumber" value=""/>
 
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" data-bind="click: $parent.contactSeller" class="btn btn-primary">Contact seller</button>
+                        <button id="closePopup" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="sendMessage" type="button" data-bind="click: $parent.contactSeller" class="btn btn-primary">Contact seller</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

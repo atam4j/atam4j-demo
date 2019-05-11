@@ -1,6 +1,7 @@
 package me.atam.planes4sale.browser;
 
 import me.atam.atam4j.Monitor;
+import me.atam.planes4sale.BrowserBasedAcceptanceTest;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -11,9 +12,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class HomepageAcceptanceTest extends BrowserBasedAcceptanceTest {
 
     @Test
-    public void canSearchForBoeings() {
+    public void homepageLoadsAndHasButtons() {
         //this has EVENT issues
         driver.get(getHostAndPort());
+
+        waitForElementToBeVisible("boeingSearchButton");
 
         assertThat(driver.getTitle(), CoreMatchers.is("Planes 4 Sale"));
         WebElement boeingSearchButton = driver.findElementById("boeingSearchButton");

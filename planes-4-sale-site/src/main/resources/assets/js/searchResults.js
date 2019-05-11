@@ -7,7 +7,7 @@ function SearchResultsViewModel() {
 
     self.contactSellerMessage = ko.observable("Hi, I like the look of your plane.  Can we talk?");
     self.contactSellerEmail = ko.observable("youremail@address.com");
-    self.contactSellerNumber = ko.observable("0000");
+    self.contactSellerNumber = ko.observable("");
 
 
     self.contactSeller = function(){

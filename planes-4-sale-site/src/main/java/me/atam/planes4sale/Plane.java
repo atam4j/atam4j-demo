@@ -1,6 +1,7 @@
 package me.atam.planes4sale;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDate;
 
@@ -14,19 +15,31 @@ public class Plane {
     private String model;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate manufactureDate;
-    private String imageId;
     private String reg;
+    private String imageId;
+    @JsonIgnore //don't serialise seller email
+    private String sellerEmail;
 
     public Plane() {
     }
 
-    public Plane(String id, String manufacturer, String model, LocalDate manufactureDate, String imageId, String reg) {
+    public Plane(String id, String manufacturer, String model, LocalDate manufactureDate, String imageId, String reg, String sellerEmail) {
         this.id = id;
         this.manufacturer = manufacturer;
         this.model = model;
         this.manufactureDate = manufactureDate;
         this.imageId = imageId;
         this.reg = reg;
+        this.sellerEmail = sellerEmail;
+    }
+
+
+    public String getSellerEmail() {
+        return sellerEmail;
+    }
+
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
     }
 
     public String getManufacturer() {

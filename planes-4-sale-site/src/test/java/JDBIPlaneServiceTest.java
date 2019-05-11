@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.List;
 
+import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_1;
 import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_PLANE_SELLER_EMAIL_ADDRESS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -59,7 +60,7 @@ public class JDBIPlaneServiceTest {
     @Test
     public void canRetrievePlaneSellersEmail() {
         String planeSellersEmail = planeService.getPlaneSellersEmail(H2StubbedDatabase.KNOWN_PLANE_1.getId());
-        assertThat(planeSellersEmail, is(KNOWN_PLANE_SELLER_EMAIL_ADDRESS));
+        assertThat(planeSellersEmail, is(KNOWN_PLANE_1.getSellerEmail()));
     }
 
 }

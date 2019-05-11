@@ -59,7 +59,7 @@ public class ContactSellerAPIAcceptanceTest extends AcceptanceTest {
         assertThat(email.isPresent(), is(true));
         assertThat(email.get().get("planeId"), is(KNOWN_PLANE_1.getId()));
         assertThat(email.get().get("message"), is(message));
-        assertThat(email.get().get("sellerEmail"), is(KNOWN_PLANE_SELLER_EMAIL_ADDRESS));
+        assertThat(email.get().get("sellerEmail"), is(KNOWN_PLANE_1.getSellerEmail()));
         assertThat(email.get().get("buyerEmail"), is("buyer@buyer.com"));
         assertThat(email.get().get("buyerNumber"), is("555 1234"));
     }

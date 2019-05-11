@@ -13,7 +13,9 @@ import static me.atam.planes4sale.H2StubbedDatabase.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
-
+/*
+    Relies on "KNOWN" planes in the database
+ */
 public class SearchAPIAcceptanceTest extends AcceptanceTest {
 
     private APIClient apiClient = new APIClient(getHostAndPort());

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class AcceptanceTestsAsMonitorsApplication extends Application<AcceptanceTestsAsMonitorsConfiguration> {
 
     public static final int INITIAL_DELAY = 1;
-    public static final int PERIOD = 5000;
+    public static final int PERIOD = 10000;
 
     public static void main(String[] args) throws Exception {
         if (args == null || args.length == 0) {

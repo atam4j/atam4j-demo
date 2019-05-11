@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @Monitor
-public class HomepageAcceptanceTest extends BrowserBasedAcceptanceTest {
+public class HomepageMonitorAcceptanceTest extends BrowserBasedAcceptanceTest {
 
     @Test
     public void homepageLoadsAndHasButtons() {

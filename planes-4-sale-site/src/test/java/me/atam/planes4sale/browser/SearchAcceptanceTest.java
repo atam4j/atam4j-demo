@@ -12,35 +12,13 @@ public class SearchAcceptanceTest extends BrowserBasedAcceptanceTest {
 
     @Test
     public void canSearchForBoeings() {
-        driver.get(getHostAndPort() + "/search?manufacturer=boeing");
-        waitForElementToBeVisible("plane-1");
-        assertThat(driver.findElementById("plane-1").isDisplayed(), is(true));
-        assertThat(getManufacturerFromPlane("plane-1"), is("Boeing"));
-        //at this point - the test is cheating - we don't know that this will be here!
-        assertThat(getModelFromPlane("plane-1"), is("777-31B/ER"));
-        assertThat(getManufactureDateFromPlane("plane-1"), is("2015-12-01"));
-        assertThat(getRegFromPlane("plane-1"), is("B-2049"));
-    }
+        SearchResultsPage searchResultsPage = SearchResultsPage.load(getHostAndPort(), "boeing", driver);
 
-
-    private String getManufacturerFromPlane(String plane) {
-        return gettAttributeFromPlane(plane, "manufacturer");
-    }
-
-    private String getModelFromPlane(String plane) {
-        return gettAttributeFromPlane(plane, "model");
-    }
-
-    private String getManufactureDateFromPlane(String plane) {
-        return gettAttributeFromPlane(plane, "manufactureDate");
-    }
-
-    private String getRegFromPlane(String plane) {
-        return gettAttributeFromPlane(plane, "reg");
-    }
-
-
-    private String gettAttributeFromPlane(String plane, String attribute) {
-        return driver.findElementByXPath("//*[@id=\"" + plane + "\"]/td[@class=\"" + attribute + "\"]").getText();
+        SearchResultsPage.PlaneView planeView = searchResultsPage.getPlaneView("plane-1");
+        assertThat(planeView.isDisplayed(), is(true));
+        assertThat(planeView.getManufacturer(), is("Boeing"));
+        assertThat(planeView.getModel(), is("777-31B/ER"));
+        assertThat(planeView.getManufactureDate(), is("2015-12-01"));
+        assertThat(planeView.getReg(), is("B-2049"));
     }
 }

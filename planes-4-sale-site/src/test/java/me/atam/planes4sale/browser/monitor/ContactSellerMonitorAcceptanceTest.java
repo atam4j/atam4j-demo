@@ -1,5 +1,6 @@
 package me.atam.planes4sale.browser.monitor;
 
+import me.atam.atam4j.Monitor;
 import me.atam.planes4sale.BrowserBasedAcceptanceTest;
 import me.atam.planes4sale.browser.SearchResultsPage;
 import me.atam.planes4sale.browser.SearchResultsPage.PlaneView;
@@ -12,30 +13,36 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_AIRBUS;
-import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_HIDDEN_PLANE;
+import static me.atam.planes4sale.CommonDummyData.*;
 import static me.atam.planes4sale.browser.SearchResultsPage.ContactSellerPopup;
 import static me.atam.planes4sale.browser.SearchResultsPage.load;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Monitor
 public class ContactSellerMonitorAcceptanceTest extends BrowserBasedAcceptanceTest {
 
 
     @Test
     public void canContactSellerAndEmailLeadAvailable() {
         String uuid = UUID.randomUUID().toString();
+        System.out.println(UUID.randomUUID().toString());
+        System.out.println(UUID.randomUUID().toString());
+        System.out.println(UUID.randomUUID().toString());
+        System.out.println(UUID.randomUUID().toString());
+        System.out.println(UUID.randomUUID().toString());
+
+
         String message = " This message has a UUID: " + uuid;
         String buyerEmailAddress = "phill.barber@buyer.com";
         String buyerPhoneNumber = "01717171717";
 
-        SearchResultsPage searchResultsPage = load(getHostAndPort(), KNOWN_HIDDEN_PLANE.getManufacturer(), driver);
+        SearchResultsPage searchResultsPage = load(getHostAndPort(), KNOWN_HIDDEN_PLANE_MANUFACTURER, driver);
         PlaneView planeView = searchResultsPage.getPlaneView("plane-0");
         ContactSellerPopup contactSellerPopup = planeView.loadContactSellerPopup();
 
@@ -71,9 +78,9 @@ public class ContactSellerMonitorAcceptanceTest extends BrowserBasedAcceptanceTe
                 .findFirst();
 
         assertThat(email.isPresent(), is(true));
-        assertThat(email.get().get("planeId"), is(KNOWN_HIDDEN_PLANE.getId()));
+        assertThat(email.get().get("planeId"), is(KNOWN_HIDDEN_PLANE_ID));
         assertThat(email.get().get("message"), is(message));
-        assertThat(email.get().get("sellerEmail"), is(KNOWN_HIDDEN_PLANE.getSellerEmail()));
+        assertThat(email.get().get("sellerEmail"), is(KNOWN_HIDDEN_PLANE_SELLER_EMAIL));
         assertThat(email.get().get("buyerEmail"), is(buyerEmailAddress));
         assertThat(email.get().get("buyerNumber"), is(buyerPhoneNumber));
     }

@@ -1,0 +1,7 @@
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('bda80ae7', 'Boeing', '737-37Q',  DATE('1997-07-01'), '0239251', 'G-ODSK', 'real.person.bda80ae7@real.com' );
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('d3e0dda4', 'Boeing', '737-8Q8',  DATE('2001-03-26'), '0245145', 'G-XLAE', 'real.person.d3e0dda4@real.com' );
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('ca5c9b3e', 'Boeing', '737-31S',  DATE('1974-01-15'), '0245986', 'D-ADBO', 'real.person.ca5c9b3e@real.com' );
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('e97e4a6d', 'Airbus', 'A320-232', DATE('2002-05-24'), '0247565', 'G-MIDP', 'real.person.e97e4a6d@real.com' );
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('62b09382', 'Airbus', 'A320-232', DATE('2004-10-28'), '1240833', 'ZK-OJI', 'real.person.62b09382@real.com' );
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('3fcd73c7', 'Airbus', 'A340-313', DATE('1996-04-24'), '0265252', 'B-HXN', 'real.person.3fcd73c7@real.com');
+INSERT INTO planes (id, manufacturer, model, manufactureDate, imageId, reg, sellerEmail) VALUES('c3231beb', 'fae3f586183b', 'A340-541', DATE('2003-12-01'), '1360015', 'A6-ERD', 'seller.of.plane.c3231beb@fake.email.com');

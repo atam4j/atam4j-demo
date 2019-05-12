@@ -41,7 +41,8 @@ services:
       - "33060:33060"
       - "3306:3306"
     volumes:
-      - ./db-init/:/docker-entrypoint-initdb.d
+      - ./db/db-init/:/docker-entrypoint-initdb.d
+      - ./db/storage/:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: planes

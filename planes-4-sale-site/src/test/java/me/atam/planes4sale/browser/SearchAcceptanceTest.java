@@ -17,14 +17,14 @@ public class SearchAcceptanceTest extends BrowserBasedAcceptanceTest {
     @Test
     public void canSearchForBoeings() {
         SearchResultsPage searchResultsPage = SearchResultsPage.load(getHostAndPort(), "boeing", driver);
-        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-0"), KNOWN_BOEING_2);
-        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-1"), KNOWN_BOEING_1);
+        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-0"), KNOWN_BOEING_IN_STUB_DB_2);
+        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-1"), KNOWN_BOEING_IN_STUB_DB_1);
     }
 
     @Test
     public void canSearchForAirbus() {
         SearchResultsPage searchResultsPage = SearchResultsPage.load(getHostAndPort(), "airbus", driver);
-        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-0"), KNOWN_AIRBUS);
+        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-0"), KNOWN_AIRBUS_IN_STUB_DB);
     }
 
     protected void checkPlaneAsExpected(SearchResultsPage.PlaneView planeView, Plane plane) {

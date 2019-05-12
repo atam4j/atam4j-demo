@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import static me.atam.planes4sale.H2StubbedDatabase.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 /*
@@ -28,8 +28,8 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
         List<Map<String,Object>> planes = apiResponse.readEntity(List.class);
         assertThat(planes.size(), is(2));
         //returned in exact order - newest planes first!
-        checkPlaneMatchesExpectedPlane(KNOWN_BOEING_2, planes.get(0));
-        checkPlaneMatchesExpectedPlane(KNOWN_BOEING_1, planes.get(1));
+        checkPlaneMatchesExpectedPlane(KNOWN_BOEING_IN_STUB_DB_2, planes.get(0));
+        checkPlaneMatchesExpectedPlane(KNOWN_BOEING_IN_STUB_DB_1, planes.get(1));
 
     }
 
@@ -40,7 +40,7 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
         assertThat(apiResponse.getStatus(), is(200));
         List<Map<String,Object>> planes = apiResponse.readEntity(List.class);
         assertThat(planes.size(), is(greaterThan(0)));
-        checkPlaneMatchesExpectedPlane(KNOWN_AIRBUS, planes.get(0));
+        checkPlaneMatchesExpectedPlane(KNOWN_AIRBUS_IN_STUB_DB, planes.get(0));
     }
 
 

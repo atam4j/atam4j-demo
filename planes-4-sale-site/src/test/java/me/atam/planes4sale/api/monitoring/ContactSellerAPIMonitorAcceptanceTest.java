@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_HIDDEN_PLANE;
+import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_HIDDEN_PLANE_IN_STUB_DB_AND_PROD_;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -29,7 +29,7 @@ public class ContactSellerAPIMonitorAcceptanceTest extends AcceptanceTest {
                 "buyer@buyer.com",
                 "555 1234");
 
-        Response response = apiClient.contactSellerAboutPlane(KNOWN_HIDDEN_PLANE.getId(), request);
+        Response response = apiClient.contactSellerAboutPlane(KNOWN_HIDDEN_PLANE_IN_STUB_DB_AND_PROD_.getId(), request);
         assertThat(response.getStatus(), is(200));
 
         Response apiResponse = apiClient.getAllEmailLeads();
@@ -40,9 +40,9 @@ public class ContactSellerAPIMonitorAcceptanceTest extends AcceptanceTest {
                 .findFirst();
 
         assertThat(email.isPresent(), is(true));
-        assertThat(email.get().get("planeId"), is(KNOWN_HIDDEN_PLANE.getId()));
+        assertThat(email.get().get("planeId"), is(KNOWN_HIDDEN_PLANE_IN_STUB_DB_AND_PROD_.getId()));
         assertThat(email.get().get("message"), is(message));
-        assertThat(email.get().get("sellerEmail"), is(KNOWN_HIDDEN_PLANE.getSellerEmail()));
+        assertThat(email.get().get("sellerEmail"), is(KNOWN_HIDDEN_PLANE_IN_STUB_DB_AND_PROD_.getSellerEmail()));
         assertThat(email.get().get("buyerEmail"), is("buyer@buyer.com"));
         assertThat(email.get().get("buyerNumber"), is("555 1234"));
     }

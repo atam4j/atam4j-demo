@@ -1,0 +1,2 @@
+CREATE TABLE planes (id varchar(255) primary key, manufacturer varchar(255), model varchar(255), manufactureDate date, imageId varchar(255), reg varchar(255), sellerEmail varchar(255));
+CREATE TABLE emailleads (id varchar(255) primary key, buyerNumber varchar(255), buyerEmail varchar(255), planeId varchar(255), message varchar(1000), sellerEmail varchar(255));

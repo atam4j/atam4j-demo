@@ -22,7 +22,7 @@ logging:
 
 acceptanceTestConfig:
   managesDropWizard: false
-  siteAddress: "http://planes-4-sale-site:8080"
+  siteAddress: "http://planes-site:8080"
   startSeleniumLocally: false
   seleniumRemoteAddress: "http://selenium-hub:4444/wd/hub"
   localChromeDriver: null

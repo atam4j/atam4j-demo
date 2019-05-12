@@ -1,6 +1,5 @@
-import me.atam.planes4sale.H2StubbedDatabase;
-import me.atam.planes4sale.JDBIPlaneService;
-import me.atam.planes4sale.Plane;
+package me.atam.planes4sale;
+
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.h2.H2DatabasePlugin;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
@@ -10,7 +9,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_BOEING_IN_STUB_DB_1;
+import static me.atam.planes4sale.H2StubbedDatabase.KNOWN_BOEING_1_IN_STUB_DB;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -57,8 +56,8 @@ public class JDBIPlaneServiceTest {
 
     @Test
     public void canRetrievePlaneSellersEmail() {
-        String planeSellersEmail = planeService.getPlaneSellersEmail(H2StubbedDatabase.KNOWN_BOEING_IN_STUB_DB_1.getId());
-        assertThat(planeSellersEmail, is(KNOWN_BOEING_IN_STUB_DB_1.getSellerEmail()));
+        String planeSellersEmail = planeService.getPlaneSellersEmail(H2StubbedDatabase.KNOWN_BOEING_1_IN_STUB_DB.getId());
+        assertThat(planeSellersEmail, is(KNOWN_BOEING_1_IN_STUB_DB.getSellerEmail()));
     }
 
 }

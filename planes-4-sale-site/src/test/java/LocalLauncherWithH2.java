@@ -1,6 +1,6 @@
-package me.atam.planes4sale;
-
 import io.dropwizard.testing.ResourceHelpers;
+import me.atam.planes4sale.H2StubbedDatabase;
+import me.atam.planes4sale.Planes4SaleApplication;
 
 public class LocalLauncherWithH2 {
 

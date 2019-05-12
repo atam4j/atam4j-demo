@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.net.URL;
 
-public class BrowserBasedAcceptanceTest extends AcceptanceTest {
+public abstract class BrowserBasedAcceptanceTest extends AcceptanceTest {
 
 
     private static final int ATTEMPTS_TO_RETRY_FINDING_ELEMENT = 30;
@@ -22,9 +22,6 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
 
     protected RemoteWebDriver driver;
     private DriverService service;
-
-
-
 
     @Before
     public void setUp() throws Exception {
@@ -43,6 +40,17 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
         else{
             LOGGER.info("Using remote webdriver...");
             driver = new RemoteWebDriver(new URL(getConfig().getSeleniumRemoteAddress()), getChromeOptions());
+        }
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        super.tearDown();
+        driver.quit();
+
+        if(getConfig().isStartSeleniumLocally()) {
+            LOGGER.info("Stopping Selenium locally");
+            service.stop();
         }
     }
 
@@ -78,16 +86,5 @@ public class BrowserBasedAcceptanceTest extends AcceptanceTest {
         throw new RuntimeException("Could not find element with id: " + elementId + " on page: " + driver.getCurrentUrl() + " after " + ATTEMPTS_TO_RETRY_FINDING_ELEMENT + " attempts");
 
 
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        super.tearDown();
-        driver.quit();
-
-        if(getConfig().isStartSeleniumLocally()) {
-            LOGGER.info("Stopping Selenium locally");
-            service.stop();
-        }
     }
 }

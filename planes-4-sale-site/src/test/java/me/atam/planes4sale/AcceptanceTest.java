@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 public abstract class AcceptanceTest {
 
-
     public static final DropwizardTestSupport<Planes4SaleConfiguration> RULE;
     private static Logger LOGGER = LoggerFactory.getLogger(AcceptanceTest.class);
     static {
@@ -19,17 +18,6 @@ public abstract class AcceptanceTest {
             RULE = null;
         }
     }
-
-
-    public AcceptanceTestConfig getConfig(){
-        return AcceptanceTestConfigLoader.getConfig();
-    }
-
-    protected String getHostAndPort() {
-        return getConfig().getSiteAddress();
-    }
-
-
 
     @Before
     public void setUp() throws Exception{
@@ -47,5 +35,13 @@ public abstract class AcceptanceTest {
             LOGGER.info("Managing Dropwizard. Calling .after()...");
             RULE.after();
         }
+    }
+
+    public AcceptanceTestConfig getConfig(){
+        return AcceptanceTestConfigLoader.getConfig();
+    }
+
+    protected String getHostAndPort() {
+        return getConfig().getSiteAddress();
     }
 }

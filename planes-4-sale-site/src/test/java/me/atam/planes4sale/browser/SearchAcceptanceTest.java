@@ -17,8 +17,8 @@ public class SearchAcceptanceTest extends BrowserBasedAcceptanceTest {
     @Test
     public void canSearchForBoeings() {
         SearchResultsPage searchResultsPage = SearchResultsPage.load(getHostAndPort(), "boeing", driver);
-        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-0"), KNOWN_BOEING_IN_STUB_DB_2);
-        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-1"), KNOWN_BOEING_IN_STUB_DB_1);
+        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-0"), KNOWN_BOEING_2_IN_STUB_DB);
+        checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-1"), KNOWN_BOEING_1_IN_STUB_DB);
     }
 
     @Test
@@ -27,11 +27,11 @@ public class SearchAcceptanceTest extends BrowserBasedAcceptanceTest {
         checkPlaneAsExpected(searchResultsPage.getPlaneView("plane-0"), KNOWN_AIRBUS_IN_STUB_DB);
     }
 
-    protected void checkPlaneAsExpected(SearchResultsPage.PlaneView planeView, Plane plane) {
-        assertThat(planeView.isDisplayed(), is(true));
-        assertThat(planeView.getManufacturer(), is(plane.getManufacturer()));
-        assertThat(planeView.getModel(), is(plane.getModel()));
-        assertThat(planeView.getManufactureDate(), is(plane.getManufactureDate().format(DateTimeFormatter.ISO_DATE)));
-        assertThat(planeView.getReg(), is(plane.getReg()));
+    protected void checkPlaneAsExpected(SearchResultsPage.PlaneView planeOnThePage, Plane expectedPlane) {
+        assertThat(planeOnThePage.isDisplayed(), is(true));
+        assertThat(planeOnThePage.getManufacturer(), is(expectedPlane.getManufacturer()));
+        assertThat(planeOnThePage.getModel(), is(expectedPlane.getModel()));
+        assertThat(planeOnThePage.getManufactureDate(), is(expectedPlane.getManufactureDate().format(DateTimeFormatter.ISO_DATE)));
+        assertThat(planeOnThePage.getReg(), is(expectedPlane.getReg()));
     }
 }

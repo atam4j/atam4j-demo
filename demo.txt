@@ -1,0 +1,14 @@
+Show site.  Functionality. API(search and leads)
+
+Show code - App, Resource, DB
+
+Homepage test - Dependencies - Run it
+Show the Search acceptance tests. Dependencies, Run it.
+Show the Search MONITOR acceptance tests. Dependencies, Run it.
+
+
+Homepage test - EVENT ISSUES.  User Agent, also cookies are possible.  New client_id and secret for testing APIs?
+Search Results - Data issues?
+Contact Seller Acceptance Test.
+Fake plane that has fake email address that is hidden? Data issues! How do we hide the plane?
+Real plane, real email address - but don’t send the email (if test==true) don’t send mail!

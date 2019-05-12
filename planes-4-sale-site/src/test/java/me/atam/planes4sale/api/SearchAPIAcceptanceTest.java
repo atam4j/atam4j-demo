@@ -28,8 +28,8 @@ public class SearchAPIAcceptanceTest extends AcceptanceTest {
         List<Map<String,Object>> planes = apiResponse.readEntity(List.class);
         assertThat(planes.size(), is(2));
         //returned in exact order - newest planes first!
-        checkPlaneMatchesExpectedPlane(KNOWN_BOEING_IN_STUB_DB_2, planes.get(0));
-        checkPlaneMatchesExpectedPlane(KNOWN_BOEING_IN_STUB_DB_1, planes.get(1));
+        checkPlaneMatchesExpectedPlane(KNOWN_BOEING_2_IN_STUB_DB, planes.get(0));
+        checkPlaneMatchesExpectedPlane(KNOWN_BOEING_1_IN_STUB_DB, planes.get(1));
 
     }
 

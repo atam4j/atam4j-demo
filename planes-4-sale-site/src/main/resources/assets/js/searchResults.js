@@ -40,18 +40,9 @@ function SearchResultsViewModel() {
 
 
     self.showPopup = function (){
-        console.log("THE REG IS " + this.reg);
         this.popupDisplayed(true);
 
-        if (self.currentSelectedPlane()){
-            console.log("The current selected plane was: " + self.currentSelectedPlane().reg);
-
-        }
-        else{
-            console.log("No plane was selected before this")
-        }
         self.currentSelectedPlane(this);
-        console.log("Th current selected plane NOW is: " + self.currentSelectedPlane().reg);
 
         //js shouldn't reference dom - bit of a hack!
         $('#contactSellerModal').modal('show')
@@ -64,7 +55,6 @@ function SearchResultsViewModel() {
         return self.currentSelectedPlane();
     });
 
-    //TODO make manufacuturer come from url param
     $.get( "/api/public/search" + window.location.search, function( data ) {
 
       self.planes(_.map(data, function(plane, counter ){
